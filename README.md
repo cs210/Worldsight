@@ -12,12 +12,14 @@ WorldSight is... (description)
 Member | Email | Photo
 --- | --- | ---
 Jihee Hwang | jiheeh@stanford.edu | <img src="https://i.imgur.com/OjaDlnK.jpg" alt="Jihee Hwang" width="157.5" height="157.5">
+Andrew Huang | ahuang98@stanford.edu | <img src="https://andrewhuang121.github.io/images/AndrewHuang.jpg" alt="Andrew Huang" width = "157.5" height="157.5">
 
 # Team Skills Matrix:
 
 Member | Hat | Technical Skills | Non-Technical Skills | Personal Traits | Desired Growth | Weaknesses
 --- | --- | --- | --- | --- | --- | ---
 Karan | Blue | AI/deep learning, Python, some systems | Leadership skills, rapid prototyping, experimentation, interviewing people | Logical, cautious, motivated | Product management skills, embedded systems, cybersecurity | Presentation skills, time management
+Andrew | Green | ML, parallel computing | Debugging, writing, presenting | Energetic, paranoid, fun | Product management, VR development, user experience | Time management, [getting nerd sniped](https://xkcd.com/356/), often tired 
 
 
 # Team Communication:
