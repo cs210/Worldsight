@@ -1,6 +1,6 @@
 # Worldsight
 
-<img src="https://i.imgur.com/mX3OBNV.png" alt="Seer" width="540" height="185">
+<img src="https://i.imgur.com/9dTgqub.png" width = "300" height = "300" alt="Worldsight">
 
 WorldSight is... (description) 
 
