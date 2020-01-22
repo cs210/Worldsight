@@ -4,7 +4,7 @@
 
 WorldSight is... (description) 
 
-[Team Song](https://www.youtube.com/embed/a01QQZyl-_I)
+[Team Song](https://www.youtube.com/watch?v=VDvr08sCPOc)
 
 [Code Repository](https://github.com/alanefl/seer)
 
