@@ -2,7 +2,7 @@
 
 <img src="https://i.imgur.com/8ObwLVY.png" width = "300" height = "300" alt="Worldsight">
 
-WorldSight is... (description) 
+WorldSight strives to make historical assets around the world accessible to anyone, anywhere. 
 
 [Team Song](https://www.youtube.com/watch?v=VDvr08sCPOc)
 
@@ -27,10 +27,6 @@ Grace | Blue | Backend, AI/ML | presentation skills, planning/organization, time
 
 
 # Team Communication:
-1. Email us at [emails@cs210hella.mailclark.ai](emails@cs210hella.mailclark.ai)
+Email us at [contact@worldsight.com](placeholder@gmail.com)
 
-2. Slack: [cs210hella.slack.com](https://cs210hella.slack.com) (sign up [here](https://cs210hella.slack.com/signup)).
 
-3. Documentation: [Github Wiki](https://github.com/cs210/Hella/wiki).
-
-4. [Google Calendar](https://calendar.google.com/calendar/embed?src=stanfo
