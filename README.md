@@ -21,7 +21,7 @@ Member | Hat | Technical Skills | Non-Technical Skills | Personal Traits | Desir
 --- | --- | --- | --- | --- | --- | ---
 Jihee | Green | Unity, VR, graphics, AI/deep learning | visual design, presentation skills | creative, motivated | product management skills, collaborative development | time management
 Andrew | Green | ML, parallel computing | Debugging, writing, presenting | Energetic, paranoid, fun | Product management, VR development, user experience | Time management, [getting nerd sniped](https://xkcd.com/356/), often tired 
-
+Aakanksha | White/Blue | AI/deep learning, Scraping | Writing, VC, business development | outgoing, hustler | VR, Unity, Product Development | time management
 
 # Team Communication:
 1. Email us at [emails@cs210hella.mailclark.ai](emails@cs210hella.mailclark.ai)
