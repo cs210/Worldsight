@@ -15,7 +15,7 @@ Jihee Hwang | jiheeh@stanford.edu<br/>http://jiheehwang.com | <img src="http://a
 Andrew Huang | ahuang98@stanford.edu | <img src="https://andrewhuang121.github.io/images/AndrewHuang.jpg" alt="Andrew Huang" width = "157.5" height="157.5">
 Aakanksha Saxena | asaxena1@stanford.edu | <img src="https://media-exp2.licdn.com/dms/image/C5603AQEbzZalMmrTVw/profile-displayphoto-shrink_200_200/0?e=1585180800&v=beta&t=8pxYkANVYkeWiBkxnW7Ug5fgMUT67GX4VG3tL11ZKps" alt="Aakanksha Saxena" width = "157.5" height="157.5">
 Grace Cheng | gcheng21@stanford.edu | <img src="http://stanford.edu/~gcheng21/img/grace.JPG" alt="Grace Cheng" width = "157.5" height="157.5">
-Farhan Azam | fazam@stanford.edu | <img src="https://ibb.co/jrTqc4j" alt="Farhan Azam" width = "157.5" height="157.5">
+Farhan Azam | fazam@stanford.edu | <img src="https://i.imgur.com/3Kho7vN.jpg" alt="Farhan Azam" width = "157.5" height="157.5">
 
 
 # Team Skills Matrix:
