@@ -21,7 +21,7 @@ namespace GracesGames.Common.Scripts {
 		// Returns the resulting button 
 		public static GameObject FindButtonAndAddOnClickListener(string buttonName, UnityAction listenerAction) {
 			GameObject button = FindGameObjectOrError(buttonName);
-			button.GetComponent<Button>().onClick.AddListener(listenerAction);
+			button.GetComponentInChildren<Button>().onClick.AddListener(listenerAction);
 			return button;
 		}
 	}
