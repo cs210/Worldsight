@@ -1,0 +1,18 @@
+{
+    "status": "SUCCESS",
+    "execMode": "LOCAL",
+    "nodeName": "Texturing_1",
+    "nodeType": "Texturing",
+    "packageName": "aliceVision",
+    "packageVersion": null,
+    "graph": "",
+    "commandLine": "aliceVision_texturing  --input \"C:/Users/worldsightvr/Documents/MeshroomCache/Meshing/53ca3bf9f0f2712d5f6de7fc88ce49f38c1a1c8a/densePointCloud.abc\" --imagesFolder \"C:/Users/worldsightvr/Documents/MeshroomCache/PrepareDenseScene/cd159e4d13f252cfc4cf92f5cb794cddc6b51c04\" --inputMesh \"C:/Users/worldsightvr/Documents/MeshroomCache/MeshDecimate/3fff90d5d59029e23b2c10b610308abf6f22eeab/mesh.obj\" --textureSide 8192 --downscale 1 --outputTextureFileType png --unwrapMethod Basic --useUDIM True --fillHoles False --padding 5 --correctEV False --useScore True --processColorspace sRGB --multiBandDownscale 4 --multiBandNbContrib 1 5 10 0 --bestScoreThreshold 0.1 --angleHardThreshold 90.0 --forceVisibleByAllVertices False --flipNormals False --visibilityRemappingMethod PullPush --verboseLevel info --output \"C:/Users/worldsightvr/Documents/MeshroomCache/Texturing/f88e9d33381733fd9cac19535e4f8c76982c3cec\" ",
+    "env": null,
+    "startDateTime": "2020-02-19 18:54:47.370015",
+    "endDateTime": "2020-02-19 18:57:54.440246",
+    "elapsedTime": 187.07023167610168,
+    "hostname": "DESKTOP-D3834TM",
+    "sessionUid": "2e0d316c-5384-11ea-840f-f8bc12ff0274",
+    "returnCode": 0,
+    "elapsedTimeStr": "0:03:07.070232"
+}
