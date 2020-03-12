@@ -19,6 +19,13 @@ TagManager:
   - VRUIRadio
   - VRUISlider
   - VRUIAccent
+  - cube
+  - RotateX
+  - RotateY
+  - RotateZ
+  - ScaleUp
+  - ScaleDown
+  - editTarget
   layers:
   - Default
   - TransparentFX
