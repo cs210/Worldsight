@@ -52,6 +52,7 @@ public class VRFileBrowserController : MonoBehaviour
         fileBrowserUIPrefab.SetActive(true);
         SetupFileBrowser();
     }
+
     public void OnHideFileBrowser()
     {
         fileBrowserUIPrefab.SetActive(false);
@@ -172,7 +173,7 @@ public class VRFileBrowserController : MonoBehaviour
     public void CloseFileBrowser()
     {
         OnFileBrowserClose();
-        gameObject.SetActive(false);
+        OnHideFileBrowser();
     }
 
     // When a directory is clicked, update the path and the file browser
@@ -196,7 +197,7 @@ public class VRFileBrowserController : MonoBehaviour
     {
         OnFileSelect(currentFile);
         meshLoader.OnLoadClicked(currentFile);
-        gameObject.SetActive(false);
+        OnHideFileBrowser();
     }
 
     #endregion
