@@ -34,7 +34,7 @@ We are creating an intuitive pipeline in which users can upload photos of histor
 Meshroom is an open source photogrammetry software which takes in 2D photos of an object and outputs a 3D mesh object. You can find the source code and documentation for meshroom [here](https://github.com/alicevision/meshroom). Using the software and command line interface is tedious and unintuitive for less technical people, so we are wrapping a convenient GUI around the software package, and creating python scripts that run the necessary commmands to create the 3D mesh. The code for the GUI can be found [here](https://github.com/cs210/Worldsight/tree/master/software-demo), and the python scripts that run meshroom can be found [here](https://github.com/cs210/Worldsight/tree/master/pipeline). 
 
 2. Unity File Explorer and Mesh Editor
-Once the 3D mesh object is created, it will be placed in the appropriate folder in a new Unity project. The Unity scene will be pre-built with a file explorer, where the user can find and open multiple meshes and then editing them. Then Users can rotate, scale, and translate meshes into the appropriate places. The code for this can be found at [here](https://github.com/cs210/Worldsight/tree/master/treehacks). 
+Once the 3D mesh object is created, it will be placed in the appropriate folder in a new Unity project. The Unity scene will be pre-built with a file explorer, where the user can find and open multiple meshes and then editing them. Then users can rotate, scale, and translate meshes into the appropriate places. The code for this can be found at [here](https://github.com/cs210/Worldsight/tree/master/treehacks). 
 
 # Dependencies
 We are using Unity Version [2019.3.1f1](https://unity3d.com/get-unity/download/archive)
