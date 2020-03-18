@@ -17,7 +17,6 @@ Aakanksha Saxena | asaxena1@stanford.edu | <img src="https://media-exp2.licdn.co
 Grace Cheng | gcheng21@stanford.edu | <img src="http://stanford.edu/~gcheng21/img/grace.JPG" alt="Grace Cheng" width = "157.5" height="157.5">
 Farhan Azam | fazam@stanford.edu | <img src="https://i.imgur.com/3Kho7vN.jpg" alt="Farhan Azam" width = "157.5" height="157.5">
 
-
 # Team Skills Matrix:
 
 Member | Hat | Technical Skills | Non-Technical Skills | Personal Traits | Desired Growth | Weaknesses
@@ -27,6 +26,18 @@ Andrew | Green | ML, parallel computing | Debugging, writing, presenting | Energ
 Aakanksha | White/Blue | AI/deep learning, Scraping | Writing, VC, business development | outgoing, hustler | VR, Unity, Product Development | time management
 Grace | Blue | Backend, AI/ML | presentation skills, planning/organization, time management | ambitious, reliable | VR development, product management | indecision
 Farhan | White | Unity, VR, Web Development, Graphics | planning, writing | conscientious, methodical | public speaking, product management | communication
+
+# Our product
+We are creating an intuitive pipeline in which users can upload photos of historical sites and recieve a ready to go VR experience they can share with customers. We are also developing a separate VR experience to showcase what can be done with our pipeline. Our pipeline can be divided into 2 sections:
+
+1. Meshroom Automation
+Meshroom is an open source photogrammetry software which takes in 2D photos of an object and outputs a 3D mesh object. You can find the source code and documentation for meshroom [here](https://github.com/alicevision/meshroom). Using the software and command line interface is tedious and unintuitive for less technical people, so we are wrapping a convenient GUI around the software package, and creating python scripts that run the necessary commmands to create the 3D mesh. The code for the GUI can be found [here](https://github.com/cs210/Worldsight/tree/master/software-demo), and the python scripts that run meshroom can be found [here](https://github.com/cs210/Worldsight/tree/master/pipeline). 
+
+2. Unity File Explorer and Mesh Editor
+Once the 3D mesh object is created, it will be placed in the appropriate folder in a new Unity project. The Unity scene will be pre-built with a file explorer, where the user can find and open multiple meshes and then editing them. Then Users can rotate, scale, and translate meshes into the appropriate places. The code for this can be found at [here](https://github.com/cs210/Worldsight/tree/master/treehacks). 
+
+# Dependencies
+We are using Unity Version [2019.3.1f1](https://unity3d.com/get-unity/download/archive)
 
 
 # Team Communication:
