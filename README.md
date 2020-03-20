@@ -1,6 +1,6 @@
 # Worldsight
 
-<img src="https://github.com/cs210/Worldsight/blob/master/worldsight_logo.png" width = "1000" height = "250" alt="Worldsight">
+<img src="https://github.com/cs210/Worldsight/blob/master/worldsight_logo.png" width = "1000" height = "200" alt="Worldsight">
 
 WorldSight strives to make historical assets around the world accessible to anyone, anywhere. We are primarily targeting museums and historical sites that want to use VR to allow individuals to explore inaccesible locations. 
 
@@ -30,6 +30,8 @@ Farhan | White | Unity, VR, Web Development, Graphics | planning, writing | cons
 # Our product
 Worldsight is building an intuitive pipeline for users to upload photos of historical sites and receive a ready-to-go virtual reality experience they can share with customers. We are also developing a separate VR experience to showcase the potential for building on top of the post-pipeline production. Our pipeline can be divided into 2 sections:
 
+<img src="https://github.com/cs210/Worldsight/blob/master/pipeline.png">
+
 ## 1. Meshroom Automation
 Meshroom is an open source photogrammetry software which takes in 2D photos of an object and outputs a 3D mesh object. You can find the source code and documentation for meshroom [here](https://github.com/alicevision/meshroom). Using the software and command line interface is tedious and unintuitive for people with less technical experience, so we are wrapping a convenient GUI around the software package, and creating python scripts that run the necessary commmands to create the 3D mesh. The python scripts that run meshroom can be found in the [pipeline](https://github.com/cs210/Worldsight/tree/master/pipeline) folder and the code for the GUI can be found in the [software-demo](https://github.com/cs210/Worldsight/tree/master/software-demo) folder. The GUI uses Tkinter, a Python GUI toolkit. 
 
@@ -41,6 +43,9 @@ We are using Unity Version [2019.3.1f1](https://unity3d.com/get-unity/download/a
 
 For best performance, we recommend using Python (>=3.5) and having an nVidia GPU.
 
+# Partnerships
+The Facebook Edmod team had two primary deliverables they wanted from us this quarter: (1) partnerships with historical sites that we could develop as Stanford students and (2) scans of these sites demonstrating the feasibility of using Realities without training. We spent dozens of hours securing official partnerships with historical sites in Italy, The Netherlands, and Spain. This was a project-specific goal that we worked on outside of traditional software development in order to fullfill the deliverable requested by Facebook and to have scans we could use in our MVP pipeline. For a full list of our partnerships, can be found [here](https://github.com/cs210/Worldsight/blob/master/site-outreach-documentation.md).
+
 # Team Communication:
 Email us at [worldsightvr@gmail.com]
 Reach us on Slack at [worldsight.slack.com]
@@ -48,3 +53,4 @@ Reach us on Slack at [worldsight.slack.com]
 # Resources
 Check out our google drive: https://drive.google.com/drive/folders/1RZd6VUiSgIe9Pw3Y4k7hHcuKc-0eMxvx?usp=sharing
 
+Tech Stack in Product Overview in Wiki: https://github.com/cs210/Worldsight/wiki/
