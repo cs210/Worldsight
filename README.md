@@ -48,6 +48,7 @@ The Facebook Edmod team had two primary deliverables they wanted from us this qu
 
 # Team Communication:
 Email us at [worldsightvr@gmail.com]
+
 Reach us on Slack at [worldsight.slack.com]
 
 # Resources
