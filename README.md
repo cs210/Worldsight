@@ -38,14 +38,13 @@ Meshroom is an open source photogrammetry software which takes in 2D photos of a
 ## 2. Unity File Explorer and Mesh Editor
 Once the 3D mesh object is created, it will be placed in a folder that the user designated. Upon putting on a VR headset and playing the worldsight application, the user is led to the edit mesh scene. The edit mesh scene lets the user open a file explorer UI in VR, which can be used to directly select the scanned mesh to load. The mesh can then be sent to the editor scene. In the editor scene, users can rotate, scale, and translate meshes into the appropriate places. The code for this can be found in the [treehacks](https://github.com/cs210/Worldsight/tree/master/treehacks) directory. 
 
-# Partnerships
-The Facebook Edmod team had two primary deliverables they wanted from us this quarter: (1) partnerships with historical sites that we could develop as Stanford students and (2) scans of these sites demonstrating the feasibility of using Realities without training. We spent dozens of hours securing official partnerships with historical sites in Italy, The Netherlands, and Spain. This was a project-specific goal that we worked on outside of traditional software development in order to fullfill the deliverable requested by Facebook and to have scans we could use in our MVP pipeline. For a full list of our partnerships, can be found [here](https://github.com/cs210/Worldsight/blob/master/site-outreach-documentation.md).
-
-
 # Dependencies
 We are using Unity Version [2019.3.1f1](https://unity3d.com/get-unity/download/archive) and the current stable build of [Meshroom](https://github.com/alicevision/meshroom/blob/develop/INSTALL.md). Meshroom is built on top of [AliceVision](https://github.com/alicevision/AliceVision/blob/develop/INSTALL.md) and [CUDA](https://developer.nvidia.com/cuda-downloads).
 
 For best performance, we recommend using Python (>=3.5) and having an nVidia GPU.
+
+# Partnerships
+The Facebook Edmod team had two primary deliverables they wanted from us this quarter: (1) partnerships with historical sites that we could develop as Stanford students and (2) scans of these sites demonstrating the feasibility of using Realities without training. We spent dozens of hours securing official partnerships with historical sites in Italy, The Netherlands, and Spain. This was a project-specific goal that we worked on outside of traditional software development in order to fullfill the deliverable requested by Facebook and to have scans we could use in our MVP pipeline. For a full list of our partnerships, can be found [here](https://github.com/cs210/Worldsight/blob/master/site-outreach-documentation.md).
 
 # Team Communication:
 Email us at [worldsightvr@gmail.com]
