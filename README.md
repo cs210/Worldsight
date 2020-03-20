@@ -1,8 +1,8 @@
 # Worldsight
 
-<img src="https://i.imgur.com/8ObwLVY.png" width = "300" height = "300" alt="Worldsight">
+<img src="https://github.com/cs210/Worldsight/blob/master/worldsight_logo.png" width = "300" height = "300" alt="Worldsight">
 
-WorldSight strives to make historical assets around the world accessible to anyone, anywhere. 
+WorldSight strives to make historical assets around the world accessible to anyone, anywhere. We are primarily targeting museums and historical sites that want to use VR to allow individuals to explore inaccesible locations. 
 
 [Team Song](https://www.youtube.com/watch?v=VDvr08sCPOc)
 
