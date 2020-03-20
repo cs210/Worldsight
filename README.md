@@ -47,4 +47,4 @@ Reach us on Slack at [worldsight.slack.com]
 
 # Resources
 Check out our google drive: https://drive.google.com/drive/folders/1RZd6VUiSgIe9Pw3Y4k7hHcuKc-0eMxvx?usp=sharing
-
+Tech Stack in Product Overview in Wiki: https://github.com/cs210/Worldsight/wiki/
