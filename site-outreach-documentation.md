@@ -1,3 +1,7 @@
+**Pompeii, Italy**
+- Royal Palace (over 100 rooms that could potentially be scanned)
+- Cathedral 
+
 **Amsterdam, The Netherlands**
 - Aula of the University of Amsterdam (formerly an Old Lutheran Church) 
 - Agnietenkapel (15th-century Gothic chapel, birthplace of the University of Amsterdam)
@@ -22,6 +26,7 @@
 - Dr. Julia Doménech, former Associate Professor of Art History at the Complutense University of Madrid and affiliate of the Stanford in Madrid program
 - Professor Beatriz Pérez Galán, Complutense University of Madrid and affiliated with the Stanford in Madrid program 
 - Professor Luis Mayo Vega, Complutense University of Madrid and affiliated with the Stanford in Madrid program 
+- Professor Marsh McCall, Classics Department @ Stanford University
 - Professor Isidro Yebra Prada, Art History faculty affiliated with the Stanford in Madrid program 
 - Professor Niko Besnier, professor of Cultural Anthropology, University of Amsterdam
 - Professor Barbara Pitkin, Religious Studies Senior Lecturer @ School of Humanities and Sciences, Stanford University
