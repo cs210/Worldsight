@@ -30,6 +30,8 @@ Farhan | White | Unity, VR, Web Development, Graphics | planning, writing | cons
 # Our product
 We are creating an intuitive pipeline in which users can upload photos of historical sites and recieve a ready to go VR experience they can share with customers. We are also developing a separate VR experience to showcase what can be done with our pipeline. Our pipeline can be divided into 2 sections:
 
+<img src="https://github.com/cs210/Worldsight/blob/master/pipeline.png"
+
 ## 1. Meshroom Automation
 Meshroom is an open source photogrammetry software which takes in 2D photos of an object and outputs a 3D mesh object. You can find the source code and documentation for meshroom [here](https://github.com/alicevision/meshroom). Using the software and command line interface is tedious and unintuitive for less technical people, so we are wrapping a convenient GUI around the software package, and creating python scripts that run the necessary commmands to create the 3D mesh. The python scripts that run meshroom can be found [pipeline](https://github.com/cs210/Worldsight/tree/master/pipeline) folder and the code for the GUI can be found [software-demo](https://github.com/cs210/Worldsight/tree/master/software-demo) folder. The GUI uses Tkinter, a Python GUI toolkit. 
 
