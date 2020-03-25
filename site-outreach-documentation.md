@@ -1,3 +1,5 @@
+Sites we secured official permission to scan: 
+
 **Pompeii, Italy**
 - Royal Palace (over 100 rooms that could potentially be scanned)
 - Cathedral 
