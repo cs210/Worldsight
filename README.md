@@ -1,8 +1,8 @@
-# Worldsight
+# Meshworks
 
-<img src="https://github.com/cs210/Worldsight/blob/master/worldsight_logo.png" width = "1000" height = "200" alt="Worldsight">
+<img src="https://github.com/cs210/Worldsight/blob/master/meshworks-logo.png" width = "1000" height = "200" alt="Meshworks">
 
-WorldSight strives to make historical assets around the world accessible to anyone, anywhere. We are primarily targeting museums and historical sites that want to use VR to allow individuals to explore inaccesible locations. 
+Meshworks strives to make the 3D capture of real-world assets effortless and accessible to anyone, anywhere. We are primarily targeting e-commerce sellers, from artists, to fashion designers, to culinary professionals, creating a platform for them to create, customize, and share 3D models of their products through photogrammetry.
 
 [Team Song](https://www.youtube.com/watch?v=VDvr08sCPOc)
 
