@@ -39,7 +39,7 @@ class Todo extends Component {
     let {todos} = this.state;
     return(
       <div>
-        <h1>My Todo(s)</h1>
+        <h1>Meshboi is a todo app for now</h1>
         <Input getTodos = {this.getTodos}/>
         <ListTodo todos={todos} deleteTodo={this.deleteTodo}/>
       </div>
