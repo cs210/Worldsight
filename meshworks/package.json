@@ -7,6 +7,8 @@
     "start": "node index.js",
     "start-watch": "nodemon index.js",
     "dev": "concurrently \"yarn run start-watch\" \"cd client && yarn start\"",
+    "build-client": "cd client && yarn build",
+    "prod": "concurrently \"yarn run start-watch\" \"cd client && yarn run prod\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jihee Hwang",
@@ -16,7 +18,8 @@
     "create-react-app": "^3.4.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.9.9"
+    "mongoose": "^5.9.9",
+    "yarn": "^1.22.4"
   },
   "devDependencies": {
     "concurrently": "^5.1.0",
