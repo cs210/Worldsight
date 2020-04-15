@@ -28,7 +28,7 @@ Grace | Blue | Backend, AI/ML | presentation skills, planning/organization, time
 Farhan | White | Unity, VR, Web Development, Graphics | planning, writing | conscientious, methodical | public speaking, product management | communication
 
 # Our product
-Worldsight is building an intuitive pipeline, Meshworks, for e-commerce sellers to capture, customize, and share 3D models of their products with their customers. 
+Team Worldsight is building an intuitive pipeline, Meshworks, for e-commerce sellers to capture, customize, and share 3D models of their products with their customers. 
 
 We are also developing a separate web platform experience to showcase the potential for building on top of the post-pipeline production. Our pipeline can be divided into 2 sections:
 
