@@ -5,18 +5,19 @@ import Input from './Input';
 import ListTodo from './ListTodo';
 
 class Todo extends Component {
+
   state = {
     todos: []
   }
 
-  componentDidMount() {
+  componentDidMount(){
     this.getTodos();
   }
 
   getTodos = () => {
     axios.get('/api/todos')
       .then(res => {
-        if(res.data) {
+        if(res.data){
           this.setState({
             todos: res.data
           })
@@ -26,7 +27,8 @@ class Todo extends Component {
   }
 
   deleteTodo = (id) => {
-    axios.delete('/api/todos/$(id)')
+
+    axios.delete(`/api/todos/${id}`)
       .then(res => {
         if(res.data){
           this.getTodos()
@@ -36,11 +38,12 @@ class Todo extends Component {
   }
 
   render() {
-    let {todos} = this.state;
+    let { todos } = this.state;
+
     return(
       <div>
-        <h1>Meshboi is a todo app for now</h1>
-        <Input getTodos = {this.getTodos}/>
+        <h1>My Todo(s)</h1>
+        <Input getTodos={this.getTodos}/>
         <ListTodo todos={todos} deleteTodo={this.deleteTodo}/>
       </div>
     )
