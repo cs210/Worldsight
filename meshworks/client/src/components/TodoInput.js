@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import { Input } from 'semantic-ui-react'
 
-class Input extends Component {
+class TodoInput extends Component {
   state = {
     action: ""
   }
@@ -32,12 +33,17 @@ class Input extends Component {
     let {action} = this.state;
     return (
       <div>
-        <input type="text" onChange={this.handleChange} value={action} />
-        <button onClick={this.addTodo}>add todo</button>
+          <Input action={{
+            onClick: this.addTodo,
+            color: 'primary',
+            actionPosition: 'right',
+            content: "Add Todo"
+          }}
+          type="text" onChange={this.handleChange} value={action} />
       </div>
     )
   }
 
 }
 
-export default Input
+export default TodoInput

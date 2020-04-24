@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import { Header, Container, Button } from 'semantic-ui-react'
 
-class FileUploader extends Component {
+class Uploader extends Component {
   state = {
     success : false,
     url : "",
@@ -56,14 +57,14 @@ class FileUploader extends Component {
   render() {
     const SuccessMessage = () => (
       <div style={{padding:50}}>
-        <h3 style={{color: 'green'}}>Upload Successful</h3>
+        <Header size='medium' color='green'> Upload Successful </Header>
         <a href={this.state.url}>Access the file here</a>
         <br/>
       </div>
     )
     const ErrorMessage = () => (
       <div style={{padding:50}}>
-        <h3 style={{color: 'red'}}>Upload failure</h3>
+        <Header size='medium' color = 'red'> Upload failure </Header>
         <span style={{color: 'red', backgroundColor: 'black'}}>ERROR: </span>
         <span>{this.state.errorMessage}</span>
         <br/>
@@ -71,18 +72,18 @@ class FileUploader extends Component {
     )
     return (
       <div>
-        <center>
-          <h1>UPLOAD A FILE</h1>
-          {this.state.success ? <SuccessMessage/> : null}
-          {this.state.error ? <ErrorMessage/> : null}
-          <input onChange={this.handleChange} ref={(ref) => { this.uploadInput = ref; }} type="file"/>
-          <br/>
-          <button onClick={this.handleUpload}>Upload</button>
-        </center>
+        <Container textAlign='center'>
+            <Header size='huge'> UPLOAD A FILE </Header>
+            {this.state.success ? <SuccessMessage/> : null}
+            {this.state.error ? <ErrorMessage/> : null}
+            <input onChange={this.handleChange} ref={(ref) => { this.uploadInput = ref; }} type="file"/>
+            <br/>
+            <Button primary onClick={this.handleUpload}>Upload </Button>
+        </Container>
       </div>
     )
   }
 
 }
 
-export default FileUploader;
+export default Uploader;

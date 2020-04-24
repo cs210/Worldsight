@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-import Input from './Input';
+import TodoInput from './TodoInput';
 import ListTodo from './ListTodo';
+
+import {Header, Container} from 'semantic-ui-react'
 
 class Todo extends Component {
 
@@ -42,9 +44,11 @@ class Todo extends Component {
 
     return(
       <div>
-        <h1>My Todo(s)</h1>
-        <Input getTodos={this.getTodos}/>
-        <ListTodo todos={todos} deleteTodo={this.deleteTodo}/>
+        <Container textAlign='center'>
+          <Header size='huge' >My Todo(s)</Header>
+          <TodoInput getTodos={this.getTodos}/>
+          <ListTodo todos={todos} deleteTodo={this.deleteTodo}/>
+        </ Container>
       </div>
     )
   }

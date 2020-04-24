@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+import 'semantic-ui-less/semantic.less'
+
 import Navigator from './components/Navigator';
+import Todo from './components/Todo';
+import Uploader from './components/Uploader';
+
 
 class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Navigator />
-      </div>
+      <Router>
+        <Route path='/' exact component={Navigator} />
+        <Route path='/todo' component={Todo} />
+        <Route path='/upload' component={Uploader} />
+      </Router>
     );
   }
 }
