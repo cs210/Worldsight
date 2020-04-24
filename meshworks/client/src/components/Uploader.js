@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import { Header, Container, Button } from 'semantic-ui-react'
+import { Header, Grid, Button } from 'semantic-ui-react'
 
 class Uploader extends Component {
   state = {
@@ -64,7 +64,7 @@ class Uploader extends Component {
     )
     const ErrorMessage = () => (
       <div style={{padding:50}}>
-        <Header size='medium' color = 'red'> Upload failure </Header>
+        <Header as='h1' color = 'red'> Upload failure </Header>
         <span style={{color: 'red', backgroundColor: 'black'}}>ERROR: </span>
         <span>{this.state.errorMessage}</span>
         <br/>
@@ -72,14 +72,16 @@ class Uploader extends Component {
     )
     return (
       <div>
-        <Container textAlign='center'>
+        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+          <Grid.Column style={{ maxWidth: 450 }}>
             <Header size='huge'> UPLOAD A FILE </Header>
             {this.state.success ? <SuccessMessage/> : null}
             {this.state.error ? <ErrorMessage/> : null}
             <input onChange={this.handleChange} ref={(ref) => { this.uploadInput = ref; }} type="file"/>
             <br/>
             <Button primary onClick={this.handleUpload}>Upload </Button>
-        </Container>
+          </Grid.Column>
+        </Grid>
       </div>
     )
   }

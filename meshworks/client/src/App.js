@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom'
 import 'semantic-ui-less/semantic.less'
 
 import Navigator from './components/Navigator';
-import Todo from './components/Todo';
+import Tester from './components/Tester';
 import Uploader from './components/Uploader';
 
 
@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <Router>
         <Route path='/' exact component={Navigator} />
-        <Route path='/todo' component={Todo} />
+        <Route path='/tests' component={Tester} />
         <Route path='/upload' component={Uploader} />
       </Router>
     );

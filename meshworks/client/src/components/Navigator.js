@@ -15,7 +15,7 @@ const Navigator = () => {
               <Button primary as={Link} to="/upload">Upload</Button>
             </Menu.Item>
             <Menu.Item>
-              <Button secondary as={Link} to="/todo">Todo(temp)</Button>
+              <Button secondary as={Link} to="/tests">Testpage</Button>
             </Menu.Item>
             <Menu.Item>
               <Search />

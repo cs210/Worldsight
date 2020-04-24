@@ -4,7 +4,7 @@ import axios from 'axios';
 import TodoInput from './TodoInput';
 import ListTodo from './ListTodo';
 
-import {Header, Container} from 'semantic-ui-react'
+import {Header} from 'semantic-ui-react'
 
 class Todo extends Component {
 
@@ -44,11 +44,9 @@ class Todo extends Component {
 
     return(
       <div>
-        <Container textAlign='center'>
-          <Header size='huge' >My Todo(s)</Header>
-          <TodoInput getTodos={this.getTodos}/>
-          <ListTodo todos={todos} deleteTodo={this.deleteTodo}/>
-        </ Container>
+        <Header size='huge' >My Todo(s)</Header>
+        <TodoInput getTodos={this.getTodos}/>
+        <ListTodo todos={todos} deleteTodo={this.deleteTodo}/>
       </div>
     )
   }
