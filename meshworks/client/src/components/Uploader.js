@@ -1,4 +1,4 @@
-import React, { Component, Image } from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import { Header, Grid, Button } from "semantic-ui-react";
 
@@ -71,7 +71,7 @@ class Uploader extends Component {
           {" "}
           Upload Successful{" "}
         </Header>
-        <img src={this.state.url} width="300" />
+        <img src={this.state.url} width="300" alt="Successfully loaded image" />
         <br />
       </div>
     );
