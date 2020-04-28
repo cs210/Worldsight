@@ -17,7 +17,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "prod": "craco server.js",
+    "prod": "nodemon server.js",
     "test": "craco test",
     "eject": "craco eject"
   },
