@@ -29,7 +29,7 @@ class Uploader extends Component {
       fileType
     );
     axios
-      .post("http://localhost:5000/sign_s3", {
+      .post("http://mesh-works.io/sign_s3", {
         fileName: fileName,
         fileType: fileType,
       })
