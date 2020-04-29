@@ -20,8 +20,8 @@ app.use('/s3', (req, res, next) => {
     bucket: process.env.AWS_BUCKET_NAME,
     region: process.env.AWS_REGION,
     headers: {'Access-Control-Allow-Origin': '*'},
-    ACL: 'public-read',
-    uniquePrefix: true //set false to preserve original filenames
+    ACL: 'private',
+    // uniquePrefix: true //set false to preserve original filenames
   })(req, res, next)
 })
 

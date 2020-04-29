@@ -1,7 +1,29 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { Header, Grid, Button } from "semantic-ui-react";
-import UploadDropzone from './UploadDropzone'; 
+import DropzoneS3Uploader from 'react-dropzone-s3-uploader';
+require('dotenv').config();
+
+class UploadDisplay extends React.Component {
+  renderFileUpload = (uploadedFile, i) => {
+    const {filename, fileUrl, file} = uploadedFile
+
+    return (
+      <div key={i}>
+        <img src={fileUrl} />
+        <p>{file.name}</p>
+      </div>
+    )
+  }
+
+  render() {
+    const {uploadedFiles, s3url} = this.props
+    return (
+      <div> 
+        {uploadedFiles.map(this.renderFileUpload)}
+      </div>
+    )
+  }
+}
 
 class Uploader extends Component {
   constructor(props) {
@@ -32,83 +54,58 @@ class Uploader extends Component {
     this.setState({ success: false, url: "" });
   };
 
-  handleUpload = (event) => {
-    console.log("upload event!!!!!!!!!!");
-    // uploadInput: stores all files from file input field
-    let file = this.uploadInput.files[0];
-    // Split filename to name and type
-    let fileParts = this.uploadInput.files[0].name.split(".");
-    let fileName = fileParts[0];
-    let fileType = fileParts[1];
-    console.log(
-      "Preparing upload of filename ",
-      fileName,
-      "filetype",
-      fileType
-    );
-    axios
-      .post("http://localhost:5000/sign_s3", {
-        fileName: fileName,
-        fileType: fileType,
-      })
-      .then((response) => {
-        //response is returnData object with signed request & url
-        var returnData = response.data.data.returnData;
-        var signedRequest = returnData.signedRequest;
-        var url = returnData.url;
-        this.setState({ url: url });
-        console.log("Received signed request " + signedRequest);
+  handleFinishedUpload = info => {
+    console.log('File uploaded with filename', info.filename)
+    console.log('Access it on s3 at', info.fileUrl)
+  }
 
-        // headers verifies to AWS S3 that we are sending the same filetype
-        var options = {
-          headers: {
-            "Content-Type": fileType,
-          },
-        };
-
-        //put request to axios with S3 link, send file with headers
-        axios
-          .put(signedRequest, file, options)
-          .then((result) => {
-            console.log("Response from s3");
-            this.setState({ success: true });
-          })
-          .catch((error) => {
-            alert(JSON.stringify(error));
-          });
-      })
-      .catch((error) => {
-        alert(JSON.stringify(error));
-      });
-  };
+  sendMessage(message, image) {
+    const newMessage = {
+      type: 'image',
+      image: image,
+    };
+  }
 
   render() {
-    const SuccessMessage = () => (
-      <div style={{ padding: 50 }}>
-        <Header size="medium" color="green">
-          {" "}
-          Upload Successful{" "}
-        </Header>
-        <img
-          src={this.state.url}
-          width="300"
-          alt="Successfully uploaded image"
-        ></img>
-        <br />
-      </div>
-    );
-    const ErrorMessage = () => (
-      <div style={{ padding: 50 }}>
-        <Header as="h1" color="red">
-          {" "}
-          Upload failure{" "}
-        </Header>
-        <span style={{ color: "red", backgroundColor: "black" }}>ERROR: </span>
-        <span>{this.state.errorMessage}</span>
-        <br />
-      </div>
-    );
-    let imageElement = <UploadDropzone />
+    // const SuccessMessage = () => (
+    //   <div style={{ padding: 50 }}>
+    //     <Header size="medium" color="green">
+    //       {" "}
+    //       Upload Successful{" "}
+    //     </Header>
+    //     <img
+    //       src={this.state.url}
+    //       width="300"
+    //       alt="Successfully uploaded image"
+    //     ></img>
+    //     <br />
+    //   </div>
+    // );
+    // const ErrorMessage = () => (
+    //   <div style={{ padding: 50 }}>
+    //     <Header as="h1" color="red">
+    //       {" "}
+    //       Upload failure{" "}
+    //     </Header>
+    //     <span style={{ color: "red", backgroundColor: "black" }}>ERROR: </span>
+    //     <span>{this.state.errorMessage}</span>
+    //     <br />
+    //   </div>
+    // );
+    const style = {
+      height: 200,
+      border: 'dashed 2px #999',
+      borderRadius: 5,
+      position: 'relative',
+      cursor: 'pointer',
+    };
+    const s3_url = process.env.AWS_URL
+    const uploadOptions = {
+      style,
+      server: 'http://localhost:5000',
+      s3Url: {s3_url},
+    }
+    
     return (
       <div>
         <Grid
@@ -118,14 +115,7 @@ class Uploader extends Component {
         >
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header size="huge"> UPLOAD A FILE </Header>
-            {this.state.success ? <SuccessMessage /> : null}
-            {this.state.error ? <ErrorMessage /> : null}
-            {imageElement}
-            <div style={{ padding: 15 }}>
-              <Button primary onClick={this.handleUpload}>
-                Upload{" "}
-              </Button>
-            </div>
+            <DropzoneS3Uploader onFinish={this.handleFinishedUpload} {...uploadOptions} />
           </Grid.Column>
         </Grid>
       </div>
