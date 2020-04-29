@@ -1,5 +1,5 @@
 import React from 'react';
-import Uploader from './Uploader'
+
 import {Menu, Header, Container, Button, Search, Icon} from 'semantic-ui-react'
 import {Link} from "react-router-dom"
 

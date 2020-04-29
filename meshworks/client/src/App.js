@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import 'semantic-ui-less/semantic.less'
 
@@ -8,9 +7,8 @@ import Tester from './components/Tester';
 import Uploader from './components/Uploader';
 import ThemingLayout from './components/ThemingLayout';
 
-
 class App extends Component {
-
+  
   render() {
     return (
       <Router>

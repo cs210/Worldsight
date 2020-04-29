@@ -1,8 +1,26 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Header, Grid, Button } from "semantic-ui-react";
+import UploadDropzone from './UploadDropzone'; 
 
 class Uploader extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  changeHandle = (event) => {
+    const inputValue = event.target.value;
+    const propertyKey = event.target.getAttribute('name');
+    console.log('propertyKey', propertyKey);
+    console.log('inputValue', inputValue);
+    this.setState({
+      inventoryEntry: {
+        ...this.state.inventoryEntry,
+        [propertyKey]: inputValue,
+      }
+    });
+  }
+
   state = {
     success: false,
     url: "",
@@ -90,6 +108,7 @@ class Uploader extends Component {
         <br />
       </div>
     );
+    let imageElement = <UploadDropzone />
     return (
       <div>
         <Grid
@@ -101,14 +120,7 @@ class Uploader extends Component {
             <Header size="huge"> UPLOAD A FILE </Header>
             {this.state.success ? <SuccessMessage /> : null}
             {this.state.error ? <ErrorMessage /> : null}
-            <input
-              onChange={this.handleChange}
-              ref={(ref) => {
-                this.uploadInput = ref;
-              }}
-              type="file"
-            />
-            <br />
+            {imageElement}
             <div style={{ padding: 15 }}>
               <Button primary onClick={this.handleUpload}>
                 Upload{" "}
