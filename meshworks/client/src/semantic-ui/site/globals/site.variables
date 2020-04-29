@@ -1,3 +1,46 @@
 /*******************************
      User Global Variables
 *******************************/
+
+/*-------------------
+     Fonts
+--------------------*/
+
+@titleFont : 'Titillium Web Black 900', sans-serif;
+@headerFont        : 'Titillium Web', sans-serif;
+@pageFont          : 'Open Sans', sans-serif;
+@importGoogleFonts : true;
+@googleFontSizes: '400, 600, 700, 900';
+@googleFontFamily  : 'Titillium+Web:600,700,900|Oswald:400,700';
+
+
+
+
+@darkBkg : #0c1821;
+@darkBkgLighter : #282C34;
+@darkBkgLightest : #324A5F;
+
+/*--------------
+  Page Heading
+---------------*/
+
+@headerFontWeight : @bold;
+@headerLineHeight : unit((18 / 14), em);
+
+@h1 : unit((28 / 14), rem);
+@h2 : unit((24 / 14), rem);
+@h3 : unit((18 / 14), rem);
+@h4 : unit((15 / 14), rem);
+@h5 : unit((14 / 14), rem);
+
+/*---  Brand Colors  ---*/
+@primaryColor        : #FEFF4F;
+@primaryColorHover        : saturate(darken(@primaryColor, 30), 10, relative);
+@secondaryColor      : @darkBkg;
+
+/*-------------------
+      Page
+--------------------*/
+
+@pageBackground      : @darkBkgLighter;
+@textColor           : @offWhite;
