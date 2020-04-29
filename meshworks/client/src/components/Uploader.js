@@ -28,8 +28,8 @@ class Uploader extends Component {
       "filetype",
       fileType
     );
-    // old       .post("http://localhost:5000/sign_s3", {
-    axios.post("http://mesh-works.io/sign_s3", {
+    axios
+      .post("http://localhost:5000/sign_s3", {
         fileName: fileName,
         fileType: fileType,
       })
@@ -71,15 +71,11 @@ class Uploader extends Component {
           {" "}
           Upload Successful{" "}
         </Header>
-<<<<<<< HEAD
-        <img src={this.state.url} width="300" alt="Successfully loaded image" />
-=======
         <img
           src={this.state.url}
           width="300"
           alt="Successfully uploaded image"
         ></img>
->>>>>>> 2ddebeb5a50959810ea4d21fa973444175f964e7
         <br />
       </div>
     );
@@ -111,15 +107,9 @@ class Uploader extends Component {
                 this.uploadInput = ref;
               }}
               type="file"
-<<<<<<< HEAD
-            />{" "}
-            <br />
-            <div style={{ padding: 20 }}>
-=======
             />
             <br />
             <div style={{ padding: 15 }}>
->>>>>>> 2ddebeb5a50959810ea4d21fa973444175f964e7
               <Button primary onClick={this.handleUpload}>
                 Upload{" "}
               </Button>
