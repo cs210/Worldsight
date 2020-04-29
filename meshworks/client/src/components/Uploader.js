@@ -1,22 +1,22 @@
 import React, { Component } from "react";
 import { Header, Grid } from "semantic-ui-react";
 import DropzoneS3Uploader from 'react-dropzone-s3-uploader';
-require('dotenv').config();
 
+const AWS_BUCKET_URL='https://meshworks.s3.amazonaws.com/'
 class UploadDisplay extends React.Component {
   renderFileUpload = (uploadedFile, i) => {
     const {filename, fileUrl, file} = uploadedFile
-
+    const file_url = AWS_BUCKET_URL+filename
     return (
       <div key={i}>
-        <img src={fileUrl} />
+        <img src={file_url} />
         <p>{file.name}</p>
       </div>
     )
   }
 
   render() {
-    const {uploadedFiles, s3url} = this.props
+    const {uploadedFiles, s3Url} = this.props
     return (
       <div> 
         {uploadedFiles.map(this.renderFileUpload)}
@@ -39,7 +39,8 @@ class Uploader extends Component {
   
   handleFinishedUpload = info => {
     console.log('File uploaded with filename', info.filename)
-    console.log('Access it on s3 at', info.fileUrl)
+    console.log(process.env.AWS_URL)
+    console.log('Access it on s3 at', AWS_BUCKET_URL+info.filename)
   }
 
   render() {
@@ -50,11 +51,10 @@ class Uploader extends Component {
       position: 'relative',
       cursor: 'pointer',
     };
-    const s3_url = process.env.AWS_URL
     const uploadOptions = {
       style,
       server: 'http://localhost:5000',
-      s3Url: {s3_url},
+      s3Url: {AWS_BUCKET_URL},
     }
     
     return (
