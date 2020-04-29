@@ -11,7 +11,13 @@
 /* Shadow */
 @shadowDistance: 0.3em;
 @verticalPadding: 1em;
-@horizontalPadding: 2em;
+@horizontalPadding: 1.6em;
+
+/* Text */
+@fontFamily: @headerFont;
+@fontWeight: 900;
+@textColor: @secondaryColor;
+@primaryTextColor: @textColor;
 
 /* transition box shadow as well */
 @transition:
