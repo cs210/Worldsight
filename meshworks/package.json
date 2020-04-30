@@ -14,6 +14,7 @@
   "author": "Jihee Hwang",
   "license": "ISC",
   "dependencies": {
+    "@google/model-viewer": "^0.10.0",
     "aws-sdk": "^2.658.0",
     "axios": "^0.19.2",
     "body-parser": "^1.18.3",
@@ -26,6 +27,7 @@
     "prop-types": "^15.7.2",
     "props": "^0.3.0",
     "react": "^16.13.1",
+    "react-3d-viewer": "^1.0.12",
     "react-dom": "^16.13.1",
     "react-dropzone": "^11.0.1",
     "react-dropzone-s3-uploader": "^1.1.0",

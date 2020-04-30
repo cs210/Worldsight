@@ -1,11 +1,21 @@
-import React from 'react';
-import {Menu, Header, Container, Button, Search, Icon} from 'semantic-ui-react'
-import {Link} from "react-router-dom"
+import React from "react";
+import "@google/model-viewer";
+
+import {
+  Menu,
+  Header,
+  Container,
+  Button,
+  Search,
+  Icon,
+  Image,
+} from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 const Navigator = () => {
   return (
     <div>
-      <Menu borderless fixed='top' inverted>
+      <Menu borderless fixed="top" inverted>
         <Menu.Item>
           <Header className="logo" weight='900'> MESHWORKS! </Header>
         </Menu.Item>
@@ -30,12 +40,23 @@ const Navigator = () => {
             </Menu.Item>
         </Menu.Menu>
       </Menu>
-      <Container text style={{ marginTop: '7em' }}>
+      <Container text style={{ marginTop: "7em" }}>
         This will be the feed.
+        <model-viewer
+          src="shared-assets/models/cube.glb"
+          alt="A 3D model of an astronaut"
+          auto-rotate
+          camera-controls
+        ></model-viewer>
+        <model-viewer
+          src="third_party/Astronaut/Astronaut.glb"
+          alt="A 3D model of an astronaut"
+          auto-rotate
+          camera-controls
+        ></model-viewer>
       </Container>
-
     </div>
-  )
-}
+  );
+};
 
 export default Navigator;
