@@ -1,6 +1,16 @@
-import React from 'react';
-import {Menu, Header, Container, Button, Search, Icon} from 'semantic-ui-react'
-import {Link} from "react-router-dom"
+import React from "react";
+import "@google/model-viewer";
+
+import {
+  Menu,
+  Header,
+  Container,
+  Button,
+  Search,
+  Icon,
+  Image,
+} from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 const Navigator = () => {
   return (
@@ -31,7 +41,7 @@ const Navigator = () => {
           </Menu.Menu>
         </Menu>
     </div>
-  )
-}
+  );
+};
 
 export default Navigator;
