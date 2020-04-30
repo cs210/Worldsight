@@ -8,6 +8,8 @@ import Navigator from './components/Navigator';
 import Tester from './components/Tester';
 import Uploader from './components/Uploader';
 import ThemingLayout from './components/ThemingLayout';
+import MeshPage from './components/MeshPage';
+
 
 class App extends Component {
 
@@ -20,6 +22,7 @@ class App extends Component {
           <Route path='/tests' component={Tester} />
           <Route path='/theming' component={ThemingLayout} />
           <Route path='/upload' component={Uploader} />
+          <Route path='/mesh' component={MeshPage} />
         </Container>
       </Router>
     );

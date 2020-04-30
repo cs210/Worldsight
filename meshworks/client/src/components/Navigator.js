@@ -17,7 +17,7 @@ const Navigator = () => {
                 </Button>
               </Menu.Item>
               <Menu.Item>
-                <Button as={Link} to="/meshviewer">Viewer</Button>
+                <Button as={Link} to="/mesh">Meshes</Button>
               </Menu.Item>
               <Menu.Item>
                 <Button as={Link} to="/tests">Testpage</Button>

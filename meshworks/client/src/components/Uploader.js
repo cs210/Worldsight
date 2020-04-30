@@ -60,7 +60,6 @@ class Uploader extends Component {
 
     return (
       <div>
-        <a href='/' className='logo'> MESHWORKS! </a>
         <Grid
           textAlign="center"
           style={{ height: "100vh" }}
