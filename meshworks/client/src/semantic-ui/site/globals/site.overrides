@@ -2,6 +2,7 @@
          Site Overrides
 *******************************/
 .logo {
+  font-family: 'Titillium Web', sans-serif;
   color: #C8FF00 !important;
   font-size: 2em !important;
 }

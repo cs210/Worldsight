@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Header, Grid } from "semantic-ui-react";
-import DropzoneS3Uploader from "react-dropzone-s3-uploader";
+import { Header, Grid, Button } from "semantic-ui-react";
+import DropzoneS3Uploader from 'react-dropzone-s3-uploader';
 
-const AWS_BUCKET_URL = "https://meshworks.s3.amazonaws.com/";
+const AWS_BUCKET_URL='https://meshworks.s3.amazonaws.com/'
+
 class UploadDisplay extends React.Component {
   renderFileUpload = (uploadedFile, i) => {
     const { filename, fileUrl, file } = uploadedFile;
@@ -16,8 +17,12 @@ class UploadDisplay extends React.Component {
   };
 
   render() {
-    const { uploadedFiles, s3Url } = this.props;
-    return <div>{uploadedFiles.map(this.renderFileUpload)}</div>;
+    const {uploadedFiles, s3Url} = this.props
+    return (
+      <div>
+        {uploadedFiles.map(this.renderFileUpload)}
+      </div>
+    )
   }
 }
 
@@ -32,6 +37,7 @@ class Uploader extends Component {
     error: false,
     errorMessage: "",
   };
+
 
   handleFinishedUpload = (info) => {
     console.log("File uploaded with filename", info.filename);
