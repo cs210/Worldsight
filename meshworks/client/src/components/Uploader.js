@@ -68,12 +68,15 @@ class Uploader extends Component {
         >
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header size="huge"> UPLOAD A FILE </Header>
-            <DropzoneS3Uploader
-              onFinish={this.handleFinishedUpload}
-              {...uploadOptions}
-            >
-              <UploadDisplay />
-            </DropzoneS3Uploader>
+            <div>
+              <DropzoneS3Uploader
+                onFinish={this.handleFinishedUpload}
+                {...uploadOptions}
+              >
+                <UploadDisplay />
+              </DropzoneS3Uploader>
+            </div>
+            <Button primary style={{marginTop:'5em'}}> UPLOAD! </Button>
           </Grid.Column>
         </Grid>
       </div>
