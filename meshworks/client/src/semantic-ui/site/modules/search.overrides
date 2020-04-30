@@ -1,3 +1,7 @@
 /*******************************
          Site Overrides
 *******************************/
+
+.ui.search .prompt ~ .search.icon {
+  color: black;
+}

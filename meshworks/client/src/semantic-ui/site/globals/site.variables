@@ -11,7 +11,8 @@
 @pageFont          : 'Open Sans', sans-serif;
 @importGoogleFonts : true;
 @googleFontSizes: '400, 600, 700, 900';
-@googleFontFamily  : 'Titillium+Web:600,700,900|Oswald:400,700';
+@googleProtocol    : 'https://';
+@googleFontRequest : 'Titillium+Web:600,700,900|Oswald:400,700';
 
 
 
@@ -27,6 +28,7 @@
 @headerFontWeight : @bold;
 @headerLineHeight : unit((18 / 14), em);
 
+@h0 : 2em;
 @h1 : unit((28 / 14), rem);
 @h2 : unit((24 / 14), rem);
 @h3 : unit((18 / 14), rem);
@@ -34,7 +36,7 @@
 @h5 : unit((14 / 14), rem);
 
 /*---  Brand Colors  ---*/
-@primaryColor        : #FEFF4F;
+@primaryColor        : #C8FF00;
 @primaryColorHover        : saturate(darken(@primaryColor, 30), 10, relative);
 @secondaryColor      : @darkBkg;
 
@@ -43,4 +45,4 @@
 --------------------*/
 
 @pageBackground      : @darkBkgLighter;
-@textColor           : @offWhite;
+@textColor           : #D6D6D6;

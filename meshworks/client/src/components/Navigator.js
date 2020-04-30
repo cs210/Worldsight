@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {Menu, Header, Container, Button, Search, Icon} from 'semantic-ui-react'
 import {Link} from "react-router-dom"
 
@@ -8,7 +7,7 @@ const Navigator = () => {
     <div>
       <Menu borderless fixed='top' inverted>
         <Menu.Item>
-          <Header primary weight='900'> Meshworks </Header>
+          <Header className="logo" weight='900'> MESHWORKS! </Header>
         </Menu.Item>
         <Menu.Menu position='right'>
             <Menu.Item>
@@ -18,10 +17,13 @@ const Navigator = () => {
               </Button>
             </Menu.Item>
             <Menu.Item>
+              <Button as={Link} to="/meshviewer">Viewer</Button>
+            </Menu.Item>
+            <Menu.Item>
               <Button as={Link} to="/tests">Testpage</Button>
             </Menu.Item>
             <Menu.Item>
-              <Button as={Link} to="/theming">Theme Review</Button>
+              <Button as={Link} to="/theming">Theme</Button>
             </Menu.Item>
             <Menu.Item>
               <Search />

@@ -1,3 +1,7 @@
 /*******************************
          Site Overrides
 *******************************/
+.logo {
+  color: #C8FF00 !important;
+  font-size: 2em !important;
+}
