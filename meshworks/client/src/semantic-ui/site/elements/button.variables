@@ -15,7 +15,7 @@
 
 /* Text */
 @fontFamily: @headerFont;
-@fontWeight: 900;
+@fontWeight: 700;
 @textColor: @secondaryColor;
 @primaryTextColor: @textColor;
 
