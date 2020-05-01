@@ -15,15 +15,21 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 // app.use('/sign_s3', sign_s3.sign_s3);
 
-app.use('/s3', (req, res, next) => {
-  s3Router({
-    bucket: process.env.AWS_BUCKET_NAME,
-    region: process.env.AWS_REGION,
-    headers: {'Access-Control-Allow-Origin': '*'},
-    ACL: 'public-read',
-    // uniquePrefix: true //set false to preserve original filenames
-  })(req, res, next)
-})
+// app.use('/s3', (req, res, next) => { s3Router({
+//     bucket: process.env.AWS_BUCKET_NAME,
+//     region: process.env.AWS_REGION,
+//     headers: {'Access-Control-Allow-Origin': '*'},
+//     ACL: 'public-read',
+//     // uniquePrefix: true //set false to preserve original filenames
+//   })(req, res, next)
+// })
+
+app.use('/s3', require('react-dropzone-s3-uploader/s3router')({
+  bucket: process.env.AWS_BUCKET_NAME,
+  region: process.env.AWS_REGION,
+  headers: {'Access-Control-Allow-Origin': '*'},
+  ACL: 'public-read',
+}));
 
 const port = process.env.PORT || 5000;
 console.log("port is ", port)
