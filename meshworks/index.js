@@ -2,13 +2,18 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const routes = require('./routes/api');
-require('dotenv').config();
+const path = require('path');
 const s3Router = require('react-s3-uploader/s3router')
 var cors = require('cors');
+
+// var sign_s3 = require('./controllers/sign_s3');
+require('dotenv').config();
+
 const app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
+// app.use('/sign_s3', sign_s3.sign_s3);
 
 app.use('/s3', (req, res, next) => {
   s3Router({
