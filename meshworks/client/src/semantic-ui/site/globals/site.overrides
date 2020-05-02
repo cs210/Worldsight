@@ -6,3 +6,128 @@
   color: #C8FF00 !important;
   font-size: 2em !important;
 }
+
+.dzu-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 120px;
+  overflow: scroll;
+  margin: 0 auto;
+  position: relative;
+  box-sizing: border-box;
+  transition: all .15s linear;
+  border: dashed 2px #999;
+  border-radius: 5px;
+}
+
+.dzu-dropzoneActive {
+  background-color: @offWhite;
+}
+
+.dzu-dropzoneDisabled {
+  opacity: 0.5;
+}
+
+.dzu-dropzoneDisabled *:hover {
+  cursor: unset;
+}
+
+.dzu-input {
+  display: none;
+}
+
+.dzu-inputLabel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-family: @headerFont;
+  font-size: @h2;
+  font-weight: 700;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
+}
+
+.dzu-inputLabelWithFiles {
+}
+
+.dzu-previewContainer {
+  padding: 40px 3%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  min-height: 60px;
+  z-index: 1;
+  border-bottom: 1px solid #ECECEC;
+  box-sizing: border-box;
+}
+
+.dzu-previewStatusContainer {
+  display: flex;
+  color:@textColor;
+  align-items: center;
+}
+
+.dzu-previewFileName {
+}
+
+.dzu-previewImage {
+  width: auto;
+  max-height: 40px;
+  max-width: 140px;
+  border-radius: 4px;
+}
+
+.dzu-previewButton {
+  background-size: 14px 14px;
+  background-color: @offWhite;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 14px;
+  height: 14px;
+  color: @offWhite;
+  cursor: pointer;
+  opacity: 0.9;
+  margin: 0 0 2px 10px;
+}
+
+.dzu-submitButtonContainer {
+  margin: 24px 0;
+}
+
+.dzu-submitButton {
+}
+
+.dzu-submitButton:disabled {
+  background-color: #E6E6E6;
+  color: #333333;
+  cursor: unset;
+}
+
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+   appearance: none;
+  width: 15vw;
+  height: 1em;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: @offWhite;
+  border-radius: 5px;
+}
+
+progress[value]::-webkit-progress-value {
+    background-color: @primaryColor;
+    border-radius: 5px;
+}
