@@ -16,7 +16,7 @@ class UploadDisplay extends React.Component {
   }
 
   render() {
-    const {uploadedFiles, s3Url} = this.props
+    const {uploadedFiles} = this.props
     return (
       <div>
         {uploadedFiles.map(this.renderFileUpload)}
