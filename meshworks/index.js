@@ -35,12 +35,6 @@ mongoose.connect(process.env.DB, {useNewUrlParser: true})
 //since mongoose promise is deprecated, we override it with node's promise
 mongoose.Promise = global.Promise;
 
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
-
 app.use('/api', routes);
 
 app.use((req, res, next) => {
