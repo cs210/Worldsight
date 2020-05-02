@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const path = require('path');
 const app = express();
+require('dotenv').config({ path: require('find-config')('.env') })
+
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/ping', function (req, res) {
@@ -13,7 +15,7 @@ app.get('/', function (req, res) {
 });
 
 app.use('/s3', require('react-dropzone-s3-uploader/s3router')({
-	S3_BUCKET: process.env.AWS_BUCKET_NAME,
+	bucket: process.env.AWS_BUCKET_NAME,
 	region: process.env.AWS_REGION,
 	headers: {'Access-Control-Allow-Origin': '*'},
 	ACL: 'public-read',
