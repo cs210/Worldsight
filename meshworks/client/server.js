@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const path = require('path');
 const app = express();
-require('dotenv').config({ path: require('find-config')('.env') })
+
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
 app.use(express.static(path.join(__dirname, 'build')));
 
