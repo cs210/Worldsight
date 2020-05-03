@@ -8,7 +8,6 @@ import {
   Button,
   Search,
   Icon,
-  Grid,
   Image,
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
@@ -18,9 +17,9 @@ const Navigator = () => {
     <div>
       <Menu borderless fixed="top" inverted>
         <Menu.Item>
-          <Header primary weight="900">
+          <Header as={Link} to="/" className="logo" weight="900">
             {" "}
-            Meshworks{" "}
+            MESHWORKS!{" "}
           </Header>
         </Menu.Item>
         <Menu.Menu position="right">
@@ -34,13 +33,18 @@ const Navigator = () => {
             </Button>
           </Menu.Item>
           <Menu.Item>
+            <Button as={Link} to="/mesh">
+              Meshes
+            </Button>
+          </Menu.Item>
+          <Menu.Item>
             <Button as={Link} to="/tests">
               Testpage
             </Button>
           </Menu.Item>
           <Menu.Item>
             <Button as={Link} to="/theming">
-              Theme Review
+              Theme
             </Button>
           </Menu.Item>
           <Menu.Item>
@@ -48,13 +52,6 @@ const Navigator = () => {
           </Menu.Item>
         </Menu.Menu>
       </Menu>
-      <Container text style={{ marginTop: "7em" }}>
-        This will be the feed.
-      </Container>
-      <model-viewer
-        src="https://cdn.glitch.com/36cb8393-65c6-408d-a538-055ada20431b/Astronaut.glb?1542147958948"
-        alt="A 3D model of an astronaut"
-      ></model-viewer>
     </div>
   );
 };

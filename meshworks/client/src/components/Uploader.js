@@ -1,23 +1,27 @@
 import React, { Component } from "react";
-import { Header, Grid } from "semantic-ui-react";
-import DropzoneS3Uploader from "react-dropzone-s3-uploader";
+import { Header, Grid, Button } from "semantic-ui-react";
+import DropzoneS3Uploader from 'react-dropzone-s3-uploader';
 
-const AWS_BUCKET_URL = "https://meshworks.s3.amazonaws.com/";
+const S3_BUCKET_URL= 'https://meshworks.s3.amazonaws.com/'
+
 class UploadDisplay extends React.Component {
   renderFileUpload = (uploadedFile, i) => {
-    const { filename, fileUrl, file } = uploadedFile;
-    const file_url = AWS_BUCKET_URL + filename;
+    const {fileUrl, file} = uploadedFile
     return (
       <div key={i}>
-        <img src={file_url} />
+        <img src={fileUrl} />
         <p>{file.name}</p>
       </div>
-    );
-  };
+    ) 
+  }
 
   render() {
-    const { uploadedFiles, s3Url } = this.props;
-    return <div>{uploadedFiles.map(this.renderFileUpload)}</div>;
+    const {uploadedFiles} = this.props
+    return (
+      <div>
+        {uploadedFiles.map(this.renderFileUpload)}
+      </div>
+    )
   }
 }
 
@@ -32,12 +36,11 @@ class Uploader extends Component {
     error: false,
     errorMessage: "",
   };
-
-  handleFinishedUpload = (info) => {
-    console.log("File uploaded with filename", info.filename);
-    console.log(process.env.AWS_URL);
-    console.log("Access it on s3 at", AWS_BUCKET_URL + info.filename);
-  };
+  
+  handleFinishedUpload = info => {
+    console.log('File uploaded with filename', info.filename)
+    console.log('Access it on s3 at', info.fileUrl)
+  }
 
   render() {
     const style = {
@@ -49,10 +52,10 @@ class Uploader extends Component {
     };
     const uploadOptions = {
       style,
-      server: "http://localhost:5000",
-      s3Url: { AWS_BUCKET_URL },
-    };
-
+      server: 'http://localhost:5000',
+      s3Url: S3_BUCKET_URL
+    }
+    
     return (
       <div>
         <Grid
@@ -62,12 +65,15 @@ class Uploader extends Component {
         >
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header size="huge"> UPLOAD A FILE </Header>
-            <DropzoneS3Uploader
-              onFinish={this.handleFinishedUpload}
-              {...uploadOptions}
-            >
-              <UploadDisplay />
-            </DropzoneS3Uploader>
+            <div>
+              <DropzoneS3Uploader
+                onFinish={this.handleFinishedUpload}
+                {...uploadOptions}
+              >
+                <UploadDisplay />
+              </DropzoneS3Uploader>
+            </div>
+            <Button primary style={{marginTop:'5em'}}> UPLOAD! </Button>
           </Grid.Column>
         </Grid>
       </div>
@@ -75,4 +81,4 @@ class Uploader extends Component {
   }
 }
 
-export default Uploader;
+export default Uploader;  
