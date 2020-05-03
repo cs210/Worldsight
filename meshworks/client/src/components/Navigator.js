@@ -50,19 +50,11 @@ const Navigator = () => {
       </Menu>
       <Container text style={{ marginTop: "7em" }}>
         This will be the feed.
-        <model-viewer
-          src="shared-assets/models/cube.glb"
-          alt="A 3D model of an astronaut"
-          auto-rotate
-          camera-controls
-        ></model-viewer>
-        <model-viewer
-          src="third_party/Astronaut/Astronaut.glb"
-          alt="A 3D model of an astronaut"
-          auto-rotate
-          camera-controls
-        ></model-viewer>
       </Container>
+      <model-viewer
+        src="https://cdn.glitch.com/36cb8393-65c6-408d-a538-055ada20431b/Astronaut.glb?1542147958948"
+        alt="A 3D model of an astronaut"
+      ></model-viewer>
     </div>
   );
 };
