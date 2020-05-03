@@ -66,6 +66,7 @@ class UploadPage extends Component {
     return (
       <Grid textAlign="center">
         <Grid.Column style={{width: '60%'}}>
+            <Header as='h1'> Create your mesh today! </Header>
             <FileUploader
               onChangeStatus={this.handleFileChangeStatus}/>
             <Uploader />
