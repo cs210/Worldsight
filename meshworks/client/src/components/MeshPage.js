@@ -16,7 +16,7 @@ class MeshPage extends Component {
           <Grid.Column>
             <Container>
               <model-viewer
-                  src="https://cdn.glitch.com/36cb8393-65c6-408d-a538-055ada20431b/Astronaut.glb?1542147958948"
+                  src="https://meshworks.s3.amazonaws.com/glb-files/out.glb"
                   shadow-intensity="1"
                   style={{width:"70%", height:"50em"}}
                   auto-rotate
