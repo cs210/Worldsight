@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var timestamps = require('mongoose-timestamp');
 const Schema = mongoose.Schema;
 
 //create schema for todo
@@ -10,7 +11,8 @@ const ItemSchema = new Schema({
   meshURL: String,
   tags: [String],
 });
+ItemSchema.plugin(timestamps);
 
 //create model for todo
-const Item = mongoose.model('item', ItemSchema);
+const Item = mongoose.model('Item', ItemSchema);
 module.exports = Item;

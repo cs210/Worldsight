@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Container, Message, Grid, Header, Input, Button} from 'semantic-ui-react';
+import {Container, Message, Grid, Header, Input, Button, Dropdown} from 'semantic-ui-react';
 import emailjs from 'emailjs-com';
 import S3Upload from 'react-s3-uploader/s3upload.js'
-
+import Item from './Item'
 import FileUploader from './FileUploader'
 
 //params for uploading to S3.
@@ -23,7 +23,8 @@ class UploadPage extends Component {
   state = {
     email: "",
     filesReady: [],
-    submitCompleteMessage: false
+    submitCompleteMessage: false,
+    currentTags: []
   }
 
   handleSubmitCompleteMessageDismiss = () => {
@@ -76,7 +77,12 @@ class UploadPage extends Component {
     emailjs.send(service_id, template_id, template_params, user_id)
   }
 
+  submitItemInfo () {
+    this.refs.items.submitToMongoDB();
+  }
+
   submitEverything = () => {
+    this.submitItemInfo();
     this.uploadFiles();
     this.sendEmail();
   }
@@ -100,14 +106,13 @@ class UploadPage extends Component {
               onChange={this.handleChange}
               defaultValue='youremail@example.com'
             />
+            <Item ref="items"/>
             <Container style={{marginTop:'5em'}}>
               <Button primary onClick={this.submitEverything}> UPLOAD! </Button>
               {this.state.submitCompleteMessage ? submitCompleteMessage : null}
-
             </Container>
           </Grid.Column>
       </Grid>
-
     )
   }
 }

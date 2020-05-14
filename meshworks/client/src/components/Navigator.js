@@ -4,11 +4,9 @@ import "@google/model-viewer";
 import {
   Menu,
   Header,
-  Container,
   Button,
   Search,
   Icon,
-  Image,
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
