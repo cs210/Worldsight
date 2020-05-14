@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import {Container, Button, Grid, Header} from 'semantic-ui-react';
-import Dropzone, {SubmitButton, resolveValue, fileWithMeta} from 'react-dropzone-uploader'
-
-
-const S3_BUCKET_URL= 'https://meshworks.s3.amazonaws.com/'
+import {Container} from 'semantic-ui-react';
+import Dropzone from 'react-dropzone-uploader'
 
 const Layout = ({ input, previews, submitButton, dropzoneProps, files, extra: { maxFiles } }) => {
 
