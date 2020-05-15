@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
-import "@google/model-viewer";
-
+import dynamic from 'next/dynamic';
 import {Container, Grid, Header} from 'semantic-ui-react';
+
+const DynamicModelViewer = dynamic(
+  () => import('../../components/ModelViewer.js'),
+  { ssr: false }
+)
 
 class MeshPage extends Component {
 
@@ -15,13 +19,7 @@ class MeshPage extends Component {
           </Grid.Column>
           <Grid.Column>
             <Container>
-              <model-viewer
-                  src="https://meshworks.s3.amazonaws.com/glb-files/out.glb"
-                  shadow-intensity="1"
-                  style={{width:"70%", height:"50em"}}
-                  auto-rotate
-                  camera-controls
-                ></model-viewer>
+              <DynamicModelViewer />
             </Container>
           </Grid.Column>
         </Grid.Row>
