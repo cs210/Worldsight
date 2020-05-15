@@ -12,7 +12,7 @@ class UploadDisplay extends React.Component {
         <img src={fileUrl} />
         <p>{file.name}</p>
       </div>
-    ) 
+    )
   }
 
   render() {
@@ -36,7 +36,7 @@ class Uploader extends Component {
     error: false,
     errorMessage: "",
   };
-  
+
   handleFinishedUpload = info => {
     console.log('File uploaded with filename', info.filename)
     console.log('Access it on s3 at', info.fileUrl)
@@ -55,7 +55,7 @@ class Uploader extends Component {
       server: 'http://localhost:5000',
       s3Url: S3_BUCKET_URL
     }
-    
+
     return (
       <div>
         <Grid
@@ -73,7 +73,6 @@ class Uploader extends Component {
                 <UploadDisplay />
               </DropzoneS3Uploader>
             </div>
-            <Button primary style={{marginTop:'5em'}}> UPLOAD! </Button>
           </Grid.Column>
         </Grid>
       </div>
@@ -81,4 +80,4 @@ class Uploader extends Component {
   }
 }
 
-export default Uploader;  
+export default Uploader;
