@@ -4,12 +4,12 @@ const Schema = mongoose.Schema;
 
 //create schema for todo
 const ItemSchema = new Schema({
-  email: String,
-  name: String,
-  photoURL: [String],
-  videoURL: String,
-  meshURL: String,
-  tags: [String],
+  email: {type: String, default: ""},
+  name: {type: String, default: ""},
+  photoUrls:  {type: [String], default: []},
+  videoUrl: {type: String, default: ""},
+  meshUrl: {type: String, default: ""},
+  tags: {type: [String], default: []},
 });
 ItemSchema.plugin(timestamps);
 

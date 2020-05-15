@@ -8,8 +8,8 @@ import {Grid, Header} from 'semantic-ui-react';
 
 class Item extends Component {
 
-  submitToMongoDB() {
-    this.refs.item.uploadItemInfo();
+  submitToMongoDB(photoURLs) {
+    this.refs.item.uploadItemInfo(photoURLs);
   }
 
   state = {
@@ -43,7 +43,7 @@ class Item extends Component {
   }
 
   render() {
-    let { items } = this.state.items;
+    let { items } = this.state;
 
     return(
       <div>
@@ -54,7 +54,7 @@ class Item extends Component {
           <Header size='huge' >Submission Details:</Header>
           <ItemInput ref="item" getItems={this.getItems}/>
           <br></br>
-          <Header size='large' >Your Meshes:</Header>
+          <Header size='large' >Your Existing Meshes (click to delete):</Header>
           <ListItem items={items} deleteItem={this.deleteItem}/>
         </Grid.Column>
       </Grid>          

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container, Message, Grid, Header, Input, Button, Dropdown} from 'semantic-ui-react';
+import {Container, Message, Grid, Header, Input, Button} from 'semantic-ui-react';
 import emailjs from 'emailjs-com';
 import S3Upload from 'react-s3-uploader/s3upload.js'
 
@@ -25,7 +25,8 @@ class UploadPage extends Component {
     email: "",
     filesReady: [],
     submitCompleteMessage: false,
-    currentTags: []
+    currentTags: [],
+    photoURLs: []
   }
 
   handleSubmitCompleteMessageDismiss = () => {
@@ -40,7 +41,7 @@ class UploadPage extends Component {
 
   // This comes from the dropbox implementation.
   handleFileChangeStatus = (file, status, allFiles) => {
-    if (status == 'done') {
+    if (status === 'done') {
       this.state.filesReady.push(file)
     }
   }
@@ -55,11 +56,14 @@ class UploadPage extends Component {
 
   onFinishS3Put = (signResult, file) => {
     console.log(signResult, file)
+    var updatedPhotoURLs = this.state.photoURLs
+    updatedPhotoURLs.push(S3_BUCKET_URL+signResult.fileKey)
+    this.setState({photoURLs: updatedPhotoURLs})
     this.setState({submitCompleteMessage: true});
-    // If all files are done uploading
   }
 
   uploadFiles = () => {
+    var uploadComplete;
     var filesArray = this.state.filesReady.map(function(item){ return item.file;});
     const options = {
       files: filesArray,
@@ -68,7 +72,10 @@ class UploadPage extends Component {
       onProgress: this.onProgress,
       ...uploadOptions,
     }
-    new S3Upload(options);
+    return new Promise(function(resolve, reject) {
+      uploadComplete = new S3Upload(options);
+      resolve(uploadComplete);
+    });
   }
 
   sendEmail = () => {
@@ -78,14 +85,15 @@ class UploadPage extends Component {
     emailjs.send(service_id, template_id, template_params, user_id)
   }
 
-  submitItemInfo () {
-    this.refs.items.submitToMongoDB();
+  submitItemInfo =  () => {
+    this.refs.items.submitToMongoDB(this.state.photoURLs);
   }
 
-  submitEverything = () => {
-    this.submitItemInfo();
-    this.uploadFiles();
+  submitEverything = async () => {
+    var uploadComplete = await this.uploadFiles();
+    console.log("Upload to S3 Complete")
     this.sendEmail();
+    this.submitItemInfo();
   }
 
   render() {

@@ -5,27 +5,35 @@ import {Grid, Input, Dropdown, Header} from 'semantic-ui-react';
 const DEFAULT_STATE = {
   email: "",
   name: "",
-  photoURL: [],
-  videoURL: "",
-  meshURL: "",
+  photoUrls: [],
+  videoUrl: "",
+  meshUrl: "",
   tags: [],
-}
+};
 
 var currentTags = [];
 
 class ItemInput extends Component {
   state = DEFAULT_STATE
 
-  uploadItemInfo = () => {
+  uploadItemInfo = (photoURLs) => {
+    this.setState({photoUrls: photoURLs});
     this.state.tags = currentTags.map(function(o) { return o.key });
-
-    console.log("state is ", this.state)
     if (this.state.name === "") {
       console.log('Mesh Name required');
     } else if (this.state.email === "") {
       console.log('Email required');
     } else {
-      axios.post('/api/items', this.state)
+      const newItem = {
+        email: this.state.email,
+        name: this.state.name,
+        photoUrls: this.state.photoUrls,
+        videoUrl: this.state.videoUrl,
+        meshUrl: this.state.meshUrl,
+        tags: this.state.tags,
+      };
+      console.log("posting this state, ", newItem)
+      axios.post('/api/items', newItem)
         .then(res => {
           if(res.data){
             this.props.getItems();
@@ -49,7 +57,7 @@ class ItemInput extends Component {
   }
 
   render() {
-    let {email, name, photoURL, videoURL, meshURL, tags} = this.state;
+    let {email, name, photoUrls, videoUrl, meshUrl, tags} = this.state;
     return (
       <div>
       <Grid textAlign="center">
