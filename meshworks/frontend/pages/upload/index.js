@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import {Container, Message, Grid, Header, Input, Button, Dropdown} from 'semantic-ui-react';
 import emailjs from 'emailjs-com';
 import S3Upload from 'react-s3-uploader/s3upload.js'
-import Item from './Item'
-import FileUploader from './FileUploader'
+
+import Item from '../../components/Item'
+import FileUploader from '../../components/FileUploader'
 
 //params for uploading to S3.
 const S3_BUCKET_URL= 'https://meshworks.s3.amazonaws.com/'

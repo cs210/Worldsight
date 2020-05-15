@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
-import Todo from './Todo.js';
-import EmailSenderTest from './EmailSenderTest.js';
+import Todo from '../../components/Todo.js';
+import EmailSenderTest from '../../components/EmailSenderTest.js';
 
 import {Grid } from 'semantic-ui-react';
 
