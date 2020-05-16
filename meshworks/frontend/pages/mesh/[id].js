@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router'
+
 import {Container, Grid, Header} from 'semantic-ui-react';
 
 const DynamicModelViewer = dynamic(
@@ -7,14 +9,15 @@ const DynamicModelViewer = dynamic(
   { ssr: false }
 )
 
-class MeshPage extends Component {
+export default function MeshPage ({children, href}) {
+  const router = useRouter();
+  const { id } = router.query;
 
-  render() {
     return (
       <Grid divided='vertically'>
         <Grid.Row columns={2}>
           <Grid.Column textAlign='right'>
-            <Header as='h1'> Congratulations, your mesh is ready! </Header>
+            <Header as='h1'> Congratulations, your mesh {id} is ready! </Header>
             <Header as='h2'> Here is your result: </Header>
           </Grid.Column>
           <Grid.Column>
@@ -26,7 +29,4 @@ class MeshPage extends Component {
       </Grid>
 
     )
-  }
 }
-
-export default MeshPage;

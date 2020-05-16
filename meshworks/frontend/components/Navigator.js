@@ -33,7 +33,7 @@ const Navigator = () => {
             </Link>
           </Menu.Item>
           <Menu.Item>
-            <Link href="/mesh">
+            <Link href="/mesh/testpid">
               <Button>
                 Meshes
               </Button>
