@@ -1,4 +1,4 @@
-const http = requre('http');
+const http = require('http');
 
 // Create an instance of the http server to handle HTTP requests
 let app = http.createServer((req, res) => {
