@@ -17,6 +17,7 @@ export default function MeshPage ({children, href}) {
   const router = useRouter();
   const { id } = router.query;
   const [item, setItem] = useState({tags: [],});
+  const [creationDate, setCreationDate] = useState('');
   const tagElements = item.tags.map((tag) =>
     <a class="ui tag label">{tag}</a>
   );
@@ -34,6 +35,7 @@ export default function MeshPage ({children, href}) {
 
   useEffect(() => {
     fetchItem(id);
+    if (item.createdAt) setCreationDate(item.createdAt.substring(0, 10));
   });
 
     return (
@@ -43,7 +45,7 @@ export default function MeshPage ({children, href}) {
             <Header as='h1'> {item.name} </Header>
             <Container>
               <Header as='h3'> Mesh generated in </Header>
-              {item.createdAt.substring(0, 10)}
+              {creationDate}
             </Container>
             {tagElements}
           </Grid.Column>

@@ -24,19 +24,10 @@ class Item extends Component {
     axios.get('/api/items')
       .then(res => {
         if(res.data){
+          console.log(res.data);
           this.setState({
             items: res.data
           })
-        }
-      })
-      .catch(err => console.log(err))
-  }
-
-  deleteItem = (id) => {
-    axios.delete(`/api/items/${id}`)
-      .then(res => {
-        if(res.data){
-          this.getItems()
         }
       })
       .catch(err => console.log(err))
@@ -55,9 +46,9 @@ class Item extends Component {
           <ItemInput ref="item" getItems={this.getItems}/>
           <br></br>
           <Header size='large' >Your Existing Meshes (click to delete):</Header>
-          <ListItem items={items} deleteItem={this.deleteItem}/>
+          <ListItem items={items}/>
         </Grid.Column>
-      </Grid>          
+      </Grid>
       </div>
     )
   }
