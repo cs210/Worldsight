@@ -6,9 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "start-watch": "nodemon index.js",
-    "dev": "concurrently \"yarn run start-watch\" \"cd client && yarn start\"",
-    "build-client": "cd client && yarn build",
-    "prod": "concurrently \"yarn run start-watch\" \"cd client && yarn run prod\"",
+    "dev": "yarn run start-watch",
+    "prod": "yarn run start-watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jihee Hwang",
