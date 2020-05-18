@@ -46,6 +46,12 @@ router.post('/items', (req, res, next) => {
   }
 });
 
+router.get('/items/:id', (req, res, next) => {
+  Item.findOne({"_id": req.params.id})
+    .then(data => res.json(data))
+    .catch(next)
+});
+
 router.delete('/items/:id', (req, res, next) => {
   Item.findOneAndDelete({"_id": req.params.id})
     .then(data => res.json(data))
