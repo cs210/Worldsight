@@ -10,7 +10,7 @@ import Link from 'next/link';
 
 // The _id field of an item instance in the database,
 // that will be used as a test to render this scene.
-const testItemID = '5ec28f66eb559d151d5afef9';
+const testItemID = '5ec2a96aeb559d151d5afefa';
 
 const Navigator = () => {
   return (
