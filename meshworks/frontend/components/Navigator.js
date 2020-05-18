@@ -8,6 +8,10 @@ import {
 } from "semantic-ui-react";
 import Link from 'next/link';
 
+// The _id field of an item instance in the database,
+// that will be used as a test to render this scene.
+const testItemID = '5ec28f66eb559d151d5afef9';
+
 const Navigator = () => {
   return (
     <div>
@@ -33,7 +37,7 @@ const Navigator = () => {
             </Link>
           </Menu.Item>
           <Menu.Item>
-            <Link href="/mesh/testpid">
+            <Link href={'/mesh/' + testItemID}>
               <Button>
                 Meshes
               </Button>
