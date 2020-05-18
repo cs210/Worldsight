@@ -19,6 +19,10 @@ const service_id = "gmail";
 const user_id = "user_GPvH16KTRm7olTHDX1cdy"
 const template_id = "template_jPWa5xhn";
 
+/* personal account for testing due to email quota)
+const user_id = "user_qHgN70XPNdIVvirs2aDPA";
+const template_id = "template_In9oGsd4";*/
+
 class UploadPage extends Component {
 
   state = {
@@ -33,11 +37,9 @@ class UploadPage extends Component {
     this.setState({submitCompleteMessage: false});
   }
 
-  handleChange = (e) => {
-    this.setState({
-      email: e.target.value
-    });
-  }
+  handleEmailParent = (e) => {
+    this.setState({email: e});
+  } 
 
   // This comes from the dropbox implementation.
   handleFileChangeStatus = (file, status, allFiles) => {
@@ -105,19 +107,16 @@ class UploadPage extends Component {
       />
 
     return (
-      <Grid textAlign="center">
-        <Grid.Column style={{width: '60%'}}>
-            <Header as='h1'> Create your mesh today! </Header>
-            <FileUploader
-              onChangeStatus={this.handleFileChangeStatus}/>
-            <Header as='h3'> Where should we send this to later? </Header>
-            <Input
-              onChange={this.handleChange}
-              defaultValue='youremail@example.com'
-            />
-            <Item ref="items"/>
-            <Container style={{marginTop:'5em'}}>
-              <Button primary onClick={this.submitEverything}> UPLOAD! </Button>
+      <Grid textAlign="left" style={{ paddingLeft: '2%'}}>
+          <Grid.Column style={{width: '60%'}}>
+            <Header as='h1'> Create a Mesh </Header>
+            <FileUploader>
+              onChangeStatus={this.handleFileChangeStatus}
+            </FileUploader>
+            <Grid.Column style={{height: '5%'}}></Grid.Column>
+            <Item ref="items" getParentEmailHandler={this.handleEmailParent}/> 
+            <Container style={{marginTop:'3em'}}>
+              <Button primary onClick={this.submitEverything}> Submit </Button>
               {this.state.submitCompleteMessage ? submitCompleteMessage : null}
             </Container>
           </Grid.Column>
@@ -127,3 +126,4 @@ class UploadPage extends Component {
 }
 
 export default UploadPage;
+

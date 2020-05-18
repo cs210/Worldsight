@@ -9,9 +9,9 @@ const ListItem = ({ items, deleteItem }) => {
       {
         items && items.length > 0
           ? (
-            items.map(item => {
+            items.map((item,i) => {
               return (
-                <List.Item >
+                <List.Item key={i} >
                   <List.Icon name='angle right'/>
                   <List.Content key={item._id} onClick={() => deleteItem(item._id)}>
                     {item.name}

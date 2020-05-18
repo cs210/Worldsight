@@ -48,25 +48,31 @@ class ItemInput extends Component {
     this.setState({
       name: e.target.value
     });
+
   }
 
   updateEmail = (e) => {
     this.setState({
       email: e.target.value
     });
+    this.props.handleEmailChange(e.target.value);
   }
 
   render() {
     let {email, name, photoUrls, videoUrl, meshUrl, tags} = this.state;
     return (
       <div>
-      <Grid textAlign="center">
+      <Grid textAlign="left" style={{ paddingLeft: '2%'}}>
+        <Grid.Row>
+          <Grid.Column style={{width: '30%'}}>
+            <Input label={{ content: 'Email' }} labelPosition='left' placeholder='Your email here' onChange={this.updateEmail}/>
+          </Grid.Column>
+          <Grid.Column style={{width: '30%'}}>
+              <Input label={{ content: 'Name' }} labelPosition='left' placeholder='Enter item name' onChange={this.updateName}/>
+          </Grid.Column>
+        </Grid.Row>
         <Grid.Column style={{width: '60%'}}>
-          <Input label={{ content: 'Email' }} labelPosition='left' placeholder='Your email here' onChange={this.updateEmail}/>
-        <Grid.Row style={{height: '10%'}}></Grid.Row>
-          <Input label={{ content: 'Name' }} labelPosition='left' placeholder='Enter item name' onChange={this.updateName}/>
-        <Grid.Row style={{height: '10%'}}></Grid.Row>
-          <Header as='h3'> Add some tags? </Header>
+          <Header as='h3'> Relevant tags: </Header>
           <Dropdown
             fluid
             clearable

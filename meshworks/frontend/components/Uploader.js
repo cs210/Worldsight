@@ -59,7 +59,7 @@ class Uploader extends Component {
     return (
       <div>
         <Grid
-          textAlign="center"
+          textAlign="left"
           style={{ height: "100vh" }}
           verticalAlign="middle"
         >
@@ -73,7 +73,7 @@ class Uploader extends Component {
                 <UploadDisplay />
               </DropzoneS3Uploader>
             </div>
-            <Button primary style={{marginTop:'5em'}}> UPLOAD! </Button>
+            <Button primary style={{marginTop:'5em'}}> Enter </Button>
           </Grid.Column>
         </Grid>
       </div>

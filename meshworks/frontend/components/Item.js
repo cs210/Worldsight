@@ -13,12 +13,17 @@ class Item extends Component {
   }
 
   state = {
-    items: []
+    items: [],email:''
   }
 
   componentDidMount(){
     this.getItems();
   }
+
+  handleEmail = (e) => {
+    this.setState({email: e});
+    this.props.getParentEmailHandler(e);
+  } 
 
   getItems = () => {
     axios.get('/api/items')
@@ -38,20 +43,11 @@ class Item extends Component {
 
     return(
       <div>
-      <br></br>
-      <br></br>
-      <Grid textAlign="center">
-        <Grid.Column style={{height: '60%'}}>
-          <Header size='huge' >Submission Details:</Header>
-          <ItemInput ref="item" getItems={this.getItems}/>
-          <br></br>
-          <Header size='large' >Your Existing Meshes (click to delete):</Header>
-          <ListItem items={items}/>
-        </Grid.Column>
-      </Grid>
+        <ItemInput ref="item" getItems={this.getItems} handleEmailChange={this.handleEmail}/> 
       </div>
     )
   }
 }
 
 export default Item;
+
