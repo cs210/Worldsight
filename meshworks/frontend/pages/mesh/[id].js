@@ -18,8 +18,8 @@ export default function MeshPage ({children, href}) {
   const { id } = router.query;
   const [item, setItem] = useState({tags: [],});
   const [creationDate, setCreationDate] = useState('');
-  const tagElements = item.tags.map((tag) =>
-    <a className="ui tag label">{tag}</a>
+  const tagElements = item.tags.map((tag,i) =>
+    <a key={i} className="ui tag label">{tag}</a>
   );
 
   async function fetchItem(id) {
