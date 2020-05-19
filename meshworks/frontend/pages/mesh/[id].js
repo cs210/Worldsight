@@ -39,22 +39,14 @@ export default function MeshPage ({children, href}) {
   });
 
     return (
-      <Grid divided='vertically'>
-        <Grid.Row columns={2}>
-          <Grid.Column textAlign='right'>
-            <Header as='h1'> {item.name} </Header>
-            <Container>
-              <Header as='h3'> Mesh generated in </Header>
-              {creationDate}
-            </Container>
+      <Grid textAlign="left" style={{ paddingLeft: '2%'}}>
+        <Grid.Column style={{width: '75%'}}>
+           <Header as='h1'> {item.name + " (" + creationDate + ")"} </Header>
+          <DynamicModelViewer />
+          <Grid.Row>
             {tagElements}
-          </Grid.Column>
-          <Grid.Column>
-            <Container>
-              <DynamicModelViewer />
-            </Container>
-          </Grid.Column>
-        </Grid.Row>
+          </Grid.Row>
+        </Grid.Column>
       </Grid>
 
     )
