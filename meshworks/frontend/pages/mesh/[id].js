@@ -19,7 +19,7 @@ export default function MeshPage ({children, href}) {
   const [item, setItem] = useState({tags: [],});
   const [creationDate, setCreationDate] = useState('');
   const tagElements = item.tags.map((tag) =>
-    <a class="ui tag label">{tag}</a>
+    <a className="ui tag label">{tag}</a>
   );
 
   async function fetchItem(id) {

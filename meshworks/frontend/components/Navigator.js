@@ -44,13 +44,6 @@ const Navigator = () => {
             </Link>
           </Menu.Item>
           <Menu.Item>
-            <Link href="/tests">
-              <Button>
-                Testpage
-              </Button>
-            </Link>
-          </Menu.Item>
-          <Menu.Item>
             <Link href="/theming">
               <Button>
                 Theme
