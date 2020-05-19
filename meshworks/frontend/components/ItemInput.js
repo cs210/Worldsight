@@ -63,14 +63,12 @@ class ItemInput extends Component {
     return (
       <div>
       <Grid textAlign="left" style={{ paddingLeft: '2%'}}>
-        <Grid.Row>
-          <Grid.Column style={{width: '30%'}}>
-            <Input label={{ content: 'Email' }} labelPosition='left' placeholder='Your email here' onChange={this.updateEmail}/>
-          </Grid.Column>
-          <Grid.Column style={{width: '30%'}}>
-              <Input label={{ content: 'Name' }} labelPosition='left' placeholder='Enter item name' onChange={this.updateName}/>
-          </Grid.Column>
-        </Grid.Row>
+        <Grid.Column style={{width: '30%'}} style={{ paddingRight: '100%'}}>
+          <Input label={{ content: 'Email' }} labelPosition='left' placeholder='Your email here' onChange={this.updateEmail}/>
+        </Grid.Column>
+        <Grid.Column style={{width: '30%'}} style={{ paddingRight: '100%'}}>
+            <Input label={{ content: 'Name' }} labelPosition='left' placeholder='Enter item name' onChange={this.updateName}/>
+        </Grid.Column>
         <Grid.Column style={{width: '60%'}}>
           <Header as='h3'> Relevant tags: </Header>
           <Dropdown
