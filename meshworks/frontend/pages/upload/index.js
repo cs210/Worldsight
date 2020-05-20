@@ -29,6 +29,7 @@ class UploadPage extends Component {
     email: "",
     filesReady: [],
     submitCompleteMessage: false,
+    fileUploadsRemaining: 0,
     currentTags: [],
     photoURLs: []
   }
@@ -62,10 +63,17 @@ class UploadPage extends Component {
     updatedPhotoURLs.push(S3_BUCKET_URL+signResult.fileKey)
     this.setState({photoURLs: updatedPhotoURLs})
     this.setState({submitCompleteMessage: true});
+    this.setState({fileUploadsRemaining: this.state.fileUploadsRemaining - 1})
+    print(this.fileUploadsRemaining, " files remaining")
+    if (this.fileUploadsRemaining === 0) {
+      print("all files uploading, submitting to mongodb")
+      this.refs.items.submitToMongoDB(this.state.photoURLs);
+    }
   }
 
   uploadFiles = () => {
-    var uploadComplete;
+    this.setState({fileUploadsRemaining: this.state.filesReady.length})
+    print(this.fileUploadsRemaining, " files remaining")
     var filesArray = this.state.filesReady.map(function(item){ return item.file;});
     const options = {
       files: filesArray,
@@ -74,10 +82,7 @@ class UploadPage extends Component {
       onProgress: this.onProgress,
       ...uploadOptions,
     }
-    return new Promise(function(resolve, reject) {
-      uploadComplete = new S3Upload(options);
-      resolve(uploadComplete);
-    });
+    new S3Upload(options);
   }
 
   sendEmail = () => {
@@ -87,15 +92,10 @@ class UploadPage extends Component {
     emailjs.send(service_id, template_id, template_params, user_id)
   }
 
-  submitItemInfo =  () => {
-    this.refs.items.submitToMongoDB(this.state.photoURLs);
-  }
-
-  submitEverything = async () => {
-    var uploadComplete = await this.uploadFiles();
-    console.log("Upload to S3 Complete")
+  submitEverything = () => {
+    console.log("submitting everything")
+    this.uploadFiles();
     this.sendEmail();
-    this.submitItemInfo();
   }
 
   render() {
