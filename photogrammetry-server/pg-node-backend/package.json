@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "mongodb": "^3.5.7"
+  }
+}
