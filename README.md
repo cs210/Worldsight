@@ -12,7 +12,7 @@ Meshworks strives to make the 3D capture of real-world assets effortless and acc
 Member | Email | Photo
 --- | --- | ---
 Jihee Hwang | jiheeh@stanford.edu<br/>http://jiheehwang.com | <img src="http://alarmringing.com/img/sanfran_small.jpg" alt="Jihee Hwang" width="157.5" height="157.5">
-Andrew Huang | ahuang98@stanford.edu | <img src="https://andrewhuang121.github.io/images/AndrewHuang.jpg" alt="Andrew Huang" width = "157.5" height="157.5">
+Andrew Huang | ahuang98@stanford.edu | <img src="https://andrewhuang121.github.io/images/AndrewHuang.jpg" alt="Andrew Huang" width = "157.5" height="150">
 Aakanksha Saxena | asaxena1@stanford.edu | <img src="https://github.com/cs210/Worldsight/blob/master/treehacks/Headshot.png" alt="Aakanksha Saxena" width = "157.5" height="157.5">
 Grace Cheng | gcheng21@stanford.edu | <img src="http://stanford.edu/~gcheng21/img/grace.JPG" alt="Grace Cheng" width = "157.5" height="157.5">
 Farhan Azam | fazam@stanford.edu | <img src="https://i.imgur.com/3Kho7vN.jpg" alt="Farhan Azam" width = "157.5" height="157.5">
