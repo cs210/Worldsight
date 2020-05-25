@@ -3,7 +3,15 @@
 
 const { spawn } = require("child_process");
 
-const ls = spawn("ls", ["-la"]);
+var meshname = 'clorox';
+var inputDir =  `pg-inputs/${meshname}`;
+var outputDir =  `pg-outputs/${meshname}`;
+
+var command = '../meshroom/fast_pg.sh ' + inputDir + ' ' + outputDir;
+console.log(command);
+const ls = spawn(command, {
+  shell: true
+});
 
 ls.stdout.on("data", data => {
   console.log(`stdout: ${data}`);
