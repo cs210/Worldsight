@@ -1,6 +1,9 @@
 {
   "dependencies": {
     "child_process": "^1.0.2",
-    "mongodb": "^3.5.7"
+    "dotenv": "^8.2.0",
+    "mongodb": "^3.5.7",
+    "mongoose": "^5.9.15",
+    "mongoose-timestamp": "^0.6.0"
   }
 }
