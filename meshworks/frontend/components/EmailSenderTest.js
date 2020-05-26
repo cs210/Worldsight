@@ -6,6 +6,10 @@ import emailjs from 'emailjs-com';
 const service_id = "gmail";
 const user_id = "user_GPvH16KTRm7olTHDX1cdy"
 const template_id = "template_jPWa5xhn";
+/*const user_id = "user_qHgN70XPNdIVvirs2aDPA"
+const template_id = "template_In9oGsd4";*/
+
+
 
 class EmailSenderTest extends Component {
 
