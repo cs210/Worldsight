@@ -12,7 +12,7 @@ class Feed extends Component {
 
 	constructor(props){
 		super(props);
-		this.state = {items: [], defaultName: "User Name", defaultMesh: "https://meshworks.s3.amazonaws.com/glb-files/out.glb", customWidth:"50%",customHeight:"20em"};
+		this.state = {items: [], defaultMesh: "https://meshworks.s3.amazonaws.com/glb-files/out.glb", customWidth:"50%",customHeight:"20em"};
 	}
 
 	componentDidMount(){
@@ -44,12 +44,11 @@ class Feed extends Component {
 		let feedDisplay = this.state.items.map((item,i) => {
 			const meshUrl = item.meshUrl || this.state.defaultMesh;
 			const name = item.name; 
-			const yourName = item.yourName || this.state.defaultName;
 			const tagElements = item.tags.map((tag,i) => <a key={i} className="ui tag label">{tag}</a>);
 
 			return(
 				<Grid.Column>
-					<DynamicModelViewer customYourName={yourName} customName={name} customWidth="50%" customHeight="20em" customImage={meshUrl}></DynamicModelViewer>
+					<DynamicModelViewer customName={name} customWidth="50%" customHeight="20em" customImage={meshUrl}></DynamicModelViewer>
 					<Grid.Row>
 						{tagElements}
 					</Grid.Row>

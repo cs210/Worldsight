@@ -3,7 +3,6 @@ import axios from 'axios';
 import {Grid, Input, Dropdown, Header} from 'semantic-ui-react';
 
 const DEFAULT_STATE = {
-  yourName: "",
   email: "",
   name: "",
   photoUrls: [],
@@ -20,16 +19,12 @@ class ItemInput extends Component {
   uploadItemInfo = (photoURLs) => {
     this.setState({photoUrls: photoURLs});
     this.state.tags = currentTags.map(function(o) { return o.key });
-    if(this.state.yourName === ""){
-      console.log("Please enter your name.");
-    }
     if (this.state.name === "") {
       console.log('Mesh Name required');
     } else if (this.state.email === "") {
       console.log('Email required');
     } else {
       const newItem = {
-        yourName: this.state.yourName,
         email: this.state.email,
         name: this.state.name,
         photoUrls: this.state.photoUrls,
@@ -47,13 +42,6 @@ class ItemInput extends Component {
         })
         .catch(err => console.log(err));
     }
-  }
-
-  updateYourName = (e) => {
-    this.setState({
-      yourName: e.target.value
-    });
-
   }
 
   updateName = (e) => {
@@ -77,9 +65,6 @@ class ItemInput extends Component {
       <Grid textAlign="left" style={{ paddingLeft: '2%'}}>
         <Grid.Column style={{width: '30%'}} style={{ paddingRight: '100%'}}>
           <Input label={{ content: 'Email' }} labelPosition='left' placeholder='Your email here' onChange={this.updateEmail}/>
-        </Grid.Column>
-        <Grid.Column style={{width: '30%'}} style={{ paddingRight: '100%'}}>
-            <Input label={{ content: 'Your Name' }} labelPosition='left' placeholder='Enter your name' onChange={this.updateYourName}/>
         </Grid.Column>
         <Grid.Column style={{width: '30%'}} style={{ paddingRight: '100%'}}>
             <Input label={{ content: 'Mesh Name' }} labelPosition='left' placeholder='Enter item name' onChange={this.updateName}/>
