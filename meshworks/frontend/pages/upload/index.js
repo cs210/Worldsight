@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Container, Message, Grid, Header, Input, Button} from 'semantic-ui-react';
-import emailjs from 'emailjs-com';
 import S3Upload from 'react-s3-uploader/s3upload.js'
 
 import Item from '../../components/Item'
@@ -14,22 +13,12 @@ const uploadOptions = {
   signingUrl: "/s3/sign"
 }
 
-// params for sending out email.
-const service_id = "gmail";
-const user_id = "user_GPvH16KTRm7olTHDX1cdy"
-const template_id = "template_jPWa5xhn";
-
-/* personal account for testing due to email quota)
-const user_id = "user_qHgN70XPNdIVvirs2aDPA";
-const template_id = "template_In9oGsd4";*/
-
 class UploadPage extends Component {
 
   state = {
-    email: "",
     filesReady: [],
-    submitCompleteMessage: false,
     fileUploadsRemaining: 0,
+    submitCompleteMessage: false,
     currentTags: [],
     photoURLs: []
   }
@@ -37,10 +26,6 @@ class UploadPage extends Component {
   handleSubmitCompleteMessageDismiss = () => {
     this.setState({submitCompleteMessage: false});
   }
-
-  handleEmailParent = (e) => {
-    this.setState({email: e});
-  } 
 
   // This comes from the dropbox implementation.
   handleFileChangeStatus = (file, status, allFiles) => {
@@ -58,22 +43,23 @@ class UploadPage extends Component {
   }
 
   onFinishS3Put = (signResult, file) => {
+    console.log(this.state.fileUploadsRemaining, " files remaining")
     console.log(signResult, file)
     var updatedPhotoURLs = this.state.photoURLs
     updatedPhotoURLs.push(S3_BUCKET_URL+signResult.fileKey)
     this.setState({photoURLs: updatedPhotoURLs})
     this.setState({submitCompleteMessage: true});
     this.setState({fileUploadsRemaining: this.state.fileUploadsRemaining - 1})
-    print(this.fileUploadsRemaining, " files remaining")
-    if (this.fileUploadsRemaining === 0) {
-      print("all files uploading, submitting to mongodb")
+    console.log("uploaded, now ", this.state.fileUploadsRemaining, " files remaining")
+    if (this.state.fileUploadsRemaining === 0) {
+      console.log("all files uploaded, submitting to mongodb")
       this.refs.items.submitToMongoDB(this.state.photoURLs);
     }
   }
 
-  uploadFiles = () => {
+  createS3Uploader = () => {
+    var S3Uploader;
     this.setState({fileUploadsRemaining: this.state.filesReady.length})
-    print(this.fileUploadsRemaining, " files remaining")
     var filesArray = this.state.filesReady.map(function(item){ return item.file;});
     const options = {
       files: filesArray,
@@ -82,20 +68,17 @@ class UploadPage extends Component {
       onProgress: this.onProgress,
       ...uploadOptions,
     }
-    new S3Upload(options);
+    return new Promise(function(resolve, reject) {
+      S3Uploader = new S3Upload(options);
+      resolve(S3Uploader);
+    });
   }
 
-  sendEmail = () => {
-    var template_params = {
-     "reply_to": this.state.email,
-    }
-    emailjs.send(service_id, template_id, template_params, user_id)
-  }
 
-  submitEverything = () => {
-    console.log("submitting everything")
-    this.uploadFiles();
-    this.sendEmail();
+
+  submitEverything = async () => {
+    var S3Uploader = await this.createS3Uploader();
+    console.log("S3Uploader Created")
   }
 
   render() {
@@ -107,16 +90,15 @@ class UploadPage extends Component {
       />
 
     return (
-      <Grid textAlign="left" style={{ paddingLeft: '2%'}}>
-          <Grid.Column style={{width: '60%'}}>
-            <Header as='h1'> Create a Mesh </Header>
-            <FileUploader>
-              onChangeStatus={this.handleFileChangeStatus}
-            </FileUploader>
-            <Grid.Column style={{height: '5%'}}></Grid.Column>
-            <Item ref="items" getParentEmailHandler={this.handleEmailParent}/> 
-            <Container style={{marginTop:'3em'}}>
-              <Button primary onClick={this.submitEverything}> Submit </Button>
+      <Grid textAlign="center">
+        <Grid.Column style={{width: '60%'}}>
+            <Header as='h1'> Create your mesh today! </Header>
+            <FileUploader
+              onChangeStatus={this.handleFileChangeStatus}/>
+            <Header as='h3'> Where should we send this to later? </Header>
+            <Item ref="items"/>
+            <Container style={{marginTop:'5em'}}>
+              <Button primary onClick={this.submitEverything}> UPLOAD! </Button>
               {this.state.submitCompleteMessage ? submitCompleteMessage : null}
             </Container>
           </Grid.Column>
@@ -126,4 +108,3 @@ class UploadPage extends Component {
 }
 
 export default UploadPage;
-
