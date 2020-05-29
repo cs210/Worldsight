@@ -1,80 +1,116 @@
 import React, {Component} from 'react';
 import {Container, Message, Grid, Header, Input, Button} from 'semantic-ui-react';
-import emailjs from 'emailjs-com';
-import S3Upload from 'react-s3-uploader/s3upload.js'
+import S3Upload from 'react-s3-uploader/s3upload.js';
+import axios from 'axios';
 
-import Item from '../../components/Item'
-import FileUploader from '../../components/FileUploader'
+import ItemInput from '../../components/ItemInput';
+import FileUploader from '../../components/FileUploader';
 
 //params for uploading to S3.
-const S3_BUCKET_URL= 'https://meshworks.s3.amazonaws.com/'
+const S3_BUCKET_URL= 'https://meshworks.s3.amazonaws.com/';
 const uploadOptions = {
   server: 'http://localhost:5000',
   s3path: S3_BUCKET_URL,
   signingUrl: "/s3/sign"
 }
 
-// params for sending out email.
-const service_id = "gmail";
-const user_id = "user_GPvH16KTRm7olTHDX1cdy"
-const template_id = "template_jPWa5xhn";
-
-/* personal account for testing due to email quota)
-const user_id = "user_qHgN70XPNdIVvirs2aDPA";
-const template_id = "template_In9oGsd4";*/
+const emptyItem = {
+    email: "",
+    name: "",
+    photoUrls: [],
+    videoUrl: "",
+    meshUrl: "",
+    tags: [],
+  };
 
 class UploadPage extends Component {
 
   state = {
+    // Item info
     email: "",
+    name: "",
+    currentTags: [],
+    photoUrls: [],
+
+    // states only for upload process
     filesReady: [],
     submitCompleteMessage: false,
-    fileUploadsRemaining: 0,
-    currentTags: [],
-    photoURLs: []
+    fileUploadedSoFar: 0,
   }
 
+  // function that's passed onto ItemInput, used for populating text fields
+  handleItemInfoChange = (email, name, tags) => {
+    this.setState({
+      email: email,
+      name: name,
+      tags: tags.map(function(tagItem) {return tagItem.value;})
+    });
+  }
+
+  // Let's the user close the upload finished! module
   handleSubmitCompleteMessageDismiss = () => {
     this.setState({submitCompleteMessage: false});
   }
 
-  handleEmailParent = (e) => {
-    this.setState({email: e});
-  } 
+  /* UPLOAD PROCESS */
 
-  // This comes from the dropbox implementation.
-  handleFileChangeStatus = (file, status, allFiles) => {
-    if (status === 'done') {
-      this.state.filesReady.push(file)
-    }
+  // Finally, send the current item to Database
+  submitToMongoDB = () => {
+    let newItem = {
+      email: this.state.email,
+      name: this.state.name,
+      photoUrls: this.state.photoUrls,
+      videoUrl: "",
+      meshUrl: "",
+      tags: this.state.tags,
+    };
+    console.log("Posting the new item to DB: ", newItem)
+    axios.post('/api/items', newItem)
+      .then(res => {
+        if(res.data){
+          console.log("Posting to DB success!");
+          this.setState({
+            submitCompleteMessage: true,
+            fileUploadedSoFar: 0
+          });
+        }
+      })
+      .catch(err => console.log(err));
   }
 
+  // Passed onto the dropbox implementation.
+  handleFileChangeStatus = (file, status, allFiles) => {
+    if (status === 'done') {
+      this.state.filesReady.push(file);
+    }
+  }
   onProgress = (percent, status, file) => {
     console.log("Progress percent: " + percent)
   }
-
   onError = (status, file) => {
     console.log("Error uploading: " + status)
   }
 
+  // Called after each file is put to s3
   onFinishS3Put = (signResult, file) => {
-    console.log(signResult, file)
-    var updatedPhotoURLs = this.state.photoURLs
-    updatedPhotoURLs.push(S3_BUCKET_URL+signResult.fileKey)
-    this.setState({photoURLs: updatedPhotoURLs})
-    this.setState({submitCompleteMessage: true});
-    this.setState({fileUploadsRemaining: this.state.fileUploadsRemaining - 1})
-    print(this.fileUploadsRemaining, " files remaining")
-    if (this.fileUploadsRemaining === 0) {
-      print("all files uploading, submitting to mongodb")
-      this.refs.items.submitToMongoDB(this.state.photoURLs);
+    console.log(signResult, file);
+
+    let newPhotoURL = S3_BUCKET_URL+signResult.fileKey;
+    this.setState(prevState => ({
+      photoUrls: [...prevState.photoUrls, newPhotoURL],
+      fileUploadedSoFar: this.state.fileUploadedSoFar + 1
+    }));
+    if (this.state.fileUploadedSoFar == this.state.filesReady.length) {
+      this.submitToMongoDB();
     }
   }
 
-  uploadFiles = () => {
-    this.setState({fileUploadsRemaining: this.state.filesReady.length})
-    print(this.fileUploadsRemaining, " files remaining")
-    var filesArray = this.state.filesReady.map(function(item){ return item.file;});
+
+// Creates s3 uploader, which then prepares the file to be uploaded
+  createS3Uploader = () => {
+    var S3Uploader;
+
+    var filesArray = this.state.filesReady.map(function(item) {return item.file;});
     const options = {
       files: filesArray,
       onFinishS3Put: this.onFinishS3Put,
@@ -82,20 +118,21 @@ class UploadPage extends Component {
       onProgress: this.onProgress,
       ...uploadOptions,
     }
-    new S3Upload(options);
+    return new Promise(function(resolve, reject) {
+      S3Uploader = new S3Upload(options);
+      resolve(S3Uploader);
+    });
   }
 
-  sendEmail = () => {
-    var template_params = {
-     "reply_to": this.state.email,
+  // Check required fields have been populated, then initiate the upload process
+  submitEverything = async () => {
+    if (this.state.name === "") {
+      console.log('Mesh Name required');
+    } else if (this.state.email === "") {
+      console.log('Email required');
+    } else {
+      var S3Uploader = await this.createS3Uploader();
     }
-    emailjs.send(service_id, template_id, template_params, user_id)
-  }
-
-  submitEverything = () => {
-    console.log("submitting everything")
-    this.uploadFiles();
-    this.sendEmail();
   }
 
   render() {
@@ -110,11 +147,11 @@ class UploadPage extends Component {
       <Grid textAlign="left" style={{ paddingLeft: '2%'}}>
           <Grid.Column style={{width: '60%'}}>
             <Header as='h1'> Create a Mesh </Header>
-            <FileUploader>
-              onChangeStatus={this.handleFileChangeStatus}
-            </FileUploader>
+            <FileUploader onChangeStatus={this.handleFileChangeStatus} />
+
             <Grid.Column style={{height: '5%'}}></Grid.Column>
-            <Item ref="items" getParentEmailHandler={this.handleEmailParent}/> 
+            <ItemInput handleItemInfoChange = {this.handleItemInfoChange}/>
+
             <Container style={{marginTop:'3em'}}>
               <Button primary onClick={this.submitEverything}> Submit </Button>
               {this.state.submitCompleteMessage ? submitCompleteMessage : null}
@@ -126,4 +163,3 @@ class UploadPage extends Component {
 }
 
 export default UploadPage;
-

@@ -1,46 +1,13 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import {Grid, Input, Dropdown, Header} from 'semantic-ui-react';
 
-const DEFAULT_STATE = {
-  email: "",
-  name: "",
-  photoUrls: [],
-  videoUrl: "",
-  meshUrl: "",
-  tags: [],
-};
-
-var currentTags = [];
-
 class ItemInput extends Component {
-  state = DEFAULT_STATE
-
-  uploadItemInfo = (photoURLs) => {
-    this.setState({photoUrls: photoURLs});
-    this.state.tags = currentTags.map(function(o) { return o.key });
-    if (this.state.name === "") {
-      console.log('Mesh Name required');
-    } else if (this.state.email === "") {
-      console.log('Email required');
-    } else {
-      const newItem = {
-        email: this.state.email,
-        name: this.state.name,
-        photoUrls: this.state.photoUrls,
-        videoUrl: this.state.videoUrl,
-        meshUrl: this.state.meshUrl,
-        tags: this.state.tags,
-      };
-      console.log("posting this state, ", newItem)
-      axios.post('/api/items', newItem)
-        .then(res => {
-          if(res.data){
-            this.props.getItems();
-            this.setState(DEFAULT_STATE);
-          }
-        })
-        .catch(err => console.log(err));
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      name: "",
+      tags: []
     }
   }
 
@@ -48,18 +15,30 @@ class ItemInput extends Component {
     this.setState({
       name: e.target.value
     });
-
+    this.updateAllInfo();
   }
 
   updateEmail = (e) => {
     this.setState({
       email: e.target.value
     });
-    this.props.handleEmailChange(e.target.value);
+    this.updateAllInfo();
+  }
+
+  updateTags = (event, data) => {
+    let newTag = {key: data.value, text: data.value, value: data.value};
+    this.setState(prevState => ({
+      tags: [...prevState.tags, newTag]
+    }));
+    this.updateAllInfo();
+  }
+
+  updateAllInfo = () => {
+    this.props.handleItemInfoChange(this.state.email, this.state.name, this.state.tags);
   }
 
   render() {
-    let {email, name, photoUrls, videoUrl, meshUrl, tags} = this.state;
+    let {email, name, tags} = this.state;
     return (
       <div>
       <Grid textAlign="left" style={{ paddingLeft: '2%'}}>
@@ -78,11 +57,11 @@ class ItemInput extends Component {
             selection
             multiple
             allowAdditions
-            onAddItem={(event, data) => currentTags.push({key: data.value, text: data.value, value: data.value})}
-            options={currentTags}
+            onAddItem={this.updateTags}
+            options={this.state.tags}
           />
         </Grid.Column>
-      </Grid>  
+      </Grid>
       </div>
     )
   }
