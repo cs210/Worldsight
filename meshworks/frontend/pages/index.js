@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {Container,Grid,Image,Header} from 'semantic-ui-react'
-import Item from '../components/Item.js';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
 const DynamicModelViewer = dynamic(
@@ -43,7 +42,7 @@ class Feed extends Component {
 
 		let feedDisplay = this.state.items.map((item,i) => {
 			const meshUrl = item.meshUrl || this.state.defaultMesh;
-			const name = item.name; 
+			const name = item.name;
 			const tagElements = item.tags.map((tag,i) => <a key={i} className="ui tag label">{tag}</a>);
 
 			return(

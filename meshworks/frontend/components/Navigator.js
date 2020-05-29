@@ -10,7 +10,7 @@ import Link from 'next/link';
 
 // The _id field of an item instance in the database,
 // that will be used as a test to render this scene.
-const testItemID = '5ec2a96aeb559d151d5afefa';
+const testItemID = '5ed0e67611d9284f63e74984';
 
 const Navigator = () => {
   return (
@@ -39,7 +39,7 @@ const Navigator = () => {
           <Menu.Item>
             <Link href={'/mesh/' + testItemID}>
               <Button>
-                Meshes
+                Mesh Page
               </Button>
             </Link>
           </Menu.Item>
