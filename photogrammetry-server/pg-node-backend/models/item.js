@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 //create schema for todo
 const ItemSchema = new Schema({
+  yourName: {type: String, default: ""},
   email: {type: String, default: ""},
   name: {type: String, default: ""},
   photoUrls:  {type: [String], default: []},
