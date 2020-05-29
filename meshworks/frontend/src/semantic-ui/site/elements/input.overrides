@@ -1,0 +1,29 @@
+/*******************************
+         Site Overrides
+*******************************/
+.ui.input > input::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, .65);
+}
+
+.ui.input > input::-moz-placeholder {
+  color: rgba(0, 0, 0, .65);
+}
+
+.ui.input > input:-ms-input-placeholder {
+  color: rgba(0, 0, 0, .65);
+}
+
+.ui.input.focus > input::-webkit-input-placeholder,
+.ui.input > input:focus::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, .65);
+}
+
+.ui.input.focus > input::-moz-placeholder,
+.ui.input > input:focus::-moz-placeholder {
+  color: rgba(0, 0, 0, .65);
+}
+
+.ui.input.focus > input:-ms-input-placeholder,
+.ui.input > input:focus:-ms-input-placeholder {
+  color: rgba(0, 0, 0, .65);
+}
