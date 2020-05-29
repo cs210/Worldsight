@@ -1,8 +1,14 @@
+var fs = require('fs');
+var path = require('path');
 
+const download = require('images-downloader').images;
+var photogrammetry = require('./commandline-server.js');
+const EXTENSION = '.glb';
+const throwMessage = 'Failed to process new item.';
 
 // Assume that the database watcher had just been notified of
 // this new item instance.
-var newItem  = {
+var cloroxItem  = {
   _id: '5ed10da7bf3ff04a39cb2901',
   email: 'worldsightvr@gmail.com',
   name: 'Clorox',
@@ -27,18 +33,67 @@ var newItem  = {
   tags: [ 'clorox', 'box' ],
   updatedAt: '2020-05-29T13:27:03.616Z',
   createdAt: '2020-05-29T13:27:03.616Z',
-  __v: 0 }
+  __v: 0
+}
 
-// Check item is valid (includes photoURLs, etc)
+async function handleNewItem(newItem) {
 
-// create directory in ./pg_inputs named newItem._id
+  // Check item is valid (includes photoURLs, etc)
+  if (newItem.photoUrls.length == 0 || newItem._id === "") throw throwMessage;
+  var inputDir = 'pg-inputs/' + newItem._id;
 
-// download the images from newItem.photoURLs
+  console.log("Step 1: Downloading from photoURLs. " + inputDir);
+  // create directory in ./pg_inputs named newItem._id
+  if (!fs.existsSync(inputDir)){
+      fs.mkdirSync(inputDir);
+  }
+  // download the images from newItem.photoURLs
+  try {
+    let result = await download(newItem.photoUrls, inputDir);
+    console.log('All images downloaded.', result);
+  } catch (err) {
+    console.log('Images failed to download, ' + err);
+    throw throwMessage;
+  }
 
-// RUN PG. convert to mesh (output in pg_outputs)
+  // RUN PG. convert to mesh (output in pg_outputs)
+  console.log("Step 2: Running PG.");
+  var outputDir = 'pg-outputs/' + newItem._id;
+  try {
+    let result = await photogrammetry(inputDir, outputDir);
+  } catch (err) {
+    console.log('PG execution failed. \n' + err);
+    throw throwMessage;
+  }
 
-// upload mesh to S3, then update the meshURL field of this item in db
+  // upload mesh to S3, then update the meshURL field of this item in db
+  // Check mesh from photogrammetry exists
+  console.log("Step 3: Looking for mesh output.");
+  var meshPath = '';
+  try {
+    if (!fs.existsSync(outputDir)) {
+        throw 'Output directory doesn\'t exist.';
+    }
+    // Search for a .EXTENSION mesh file under the output directory.
+    var targetFiles = fs.readdirSync(outputDir).filter(
+      function(file) {
+        return path.extname(file).toLowerCase() === EXTENSION;
+      });
+    if (targetFiles.length > 0) {
+      meshPath = targetFiles[0];
+    } else { throw 'No mesh matching file extension ' + EXTENSION; }
+  } catch (error) {
+      console.log('Error: No mesh in result, PG must have failed. \n' + error);
+      throw throwMessage;
+  }
 
-// send completion email with mesh-works.io/mesh/{newItem._id} as link
+  // Upload to s3
+  console.log("Step 4: Uploading mesh " + meshPath + "to s3.");
 
-// delete downloaded directory in pg_inputs
+
+  // send completion email with mesh-works.io/mesh/{newItem._id} as link
+
+  // delete downloaded directory in pg_inputs
+}
+
+handleNewItem(cloroxItem);
