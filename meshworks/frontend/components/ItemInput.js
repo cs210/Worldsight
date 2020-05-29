@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Grid, Input, Dropdown, Header} from 'semantic-ui-react';
+import {Grid, Input, Dropdown, Header, Container} from 'semantic-ui-react';
 
 class ItemInput extends Component {
   constructor(props) {
@@ -40,16 +40,17 @@ class ItemInput extends Component {
   render() {
     let {email, name, tags} = this.state;
     return (
-      <div>
-      <Grid textAlign="left" style={{ paddingLeft: '2%'}}>
-        <Grid.Column style={{width: '30%'}} style={{ paddingRight: '100%'}}>
-          <Input label={{ content: 'Email' }} labelPosition='left' placeholder='Your email here' onChange={this.updateEmail}/>
-        </Grid.Column>
-        <Grid.Column style={{width: '30%'}} style={{ paddingRight: '100%'}}>
-            <Input label={{ content: 'Mesh Name' }} labelPosition='left' placeholder='Enter item name' onChange={this.updateName}/>
-        </Grid.Column>
-        <Grid.Column style={{width: '60%'}}>
-          <Header as='h3'> Relevant tags: </Header>
+      <Container style={{marginTop: '5em', marginBottom: '5em'}}>
+        <Container style={{ marginBottom: '2vh'}}>
+            <Header as='h3'> What will the mesh be called? </Header>
+            <Input placeholder='Mesh name' onChange={this.updateName}/>
+        </Container>
+        <Container style={{ marginBottom: '5vh'}}>
+          <Header as='h3'> Where should we reach you? </Header>
+          <Input labelPosition='left' placeholder='Your email here' onChange={this.updateEmail}/>
+        </Container>
+        <Container>
+          <Header as='h3'> Finally, tag it: </Header>
           <Dropdown
             fluid
             clearable
@@ -60,9 +61,8 @@ class ItemInput extends Component {
             onAddItem={this.updateTags}
             options={this.state.tags}
           />
-        </Grid.Column>
-      </Grid>
-      </div>
+        </Container>
+      </Container>
     )
   }
 

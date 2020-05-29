@@ -144,19 +144,29 @@ class UploadPage extends Component {
       />
 
     return (
-      <Grid textAlign="left" style={{ paddingLeft: '2%'}}>
-          <Grid.Column style={{width: '60%'}}>
-            <Header as='h1'> Create a Mesh </Header>
-            <FileUploader onChangeStatus={this.handleFileChangeStatus} />
+      <Grid textAlign="left" style = {{marginLeft: '20vw', marginRight: '20vw'}} stackable columns={2}>
+        <Grid.Row stretched>
+          <Grid.Column>
+            <Container>
+              <Header as='h1' style={{verticalAlign: 'top'}}> Create your Mesh </Header>
+            </Container>
+            <Container style={{height: '70%'}}>
+              <FileUploader onChangeStatus={this.handleFileChangeStatus}
+                            style={{marginBottom: '5vh'}} />
+            </Container>
 
-            <Grid.Column style={{height: '5%'}}></Grid.Column>
-            <ItemInput handleItemInfoChange = {this.handleItemInfoChange}/>
+          </Grid.Column>
+          <Grid.Column>
+            <Container>
+              <ItemInput handleItemInfoChange = {this.handleItemInfoChange}/>
+            </Container>
 
-            <Container style={{marginTop:'3em'}}>
+            <Container>
               <Button primary onClick={this.submitEverything}> Submit </Button>
               {this.state.submitCompleteMessage ? submitCompleteMessage : null}
             </Container>
           </Grid.Column>
+        </Grid.Row>
       </Grid>
     )
   }
