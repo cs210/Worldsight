@@ -20,13 +20,15 @@ class FileUploader extends Component{
 
   render () {
     return(
-      <Dropzone>
-        autoUpload = {false}
-        onChangeStatus={this.props.onChangeStatus}
-        LayoutComponent={Layout}
-        SubmitButtonDisabled = {true}
-        inputContent="Drop Files Here"
-      </Dropzone>
+      <Container>
+        <Dropzone
+          autoUpload = {false}
+          onChangeStatus={this.props.onChangeStatus}
+          LayoutComponent={Layout}
+          SubmitButtonDisabled = {true}
+          inputContent="Drop Files Here"
+        />
+      </Container>
     )
   }
 }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Grid, Input, Dropdown, Header} from 'semantic-ui-react';
+import emailjs from 'emailjs-com';
 
 const DEFAULT_STATE = {
   email: "",
@@ -11,11 +12,23 @@ const DEFAULT_STATE = {
   tags: [],
 };
 
+// params for sending out email.
+const service_id = "gmail";
+const user_id = "user_GPvH16KTRm7olTHDX1cdy"
+const template_id = "template_jPWa5xhn";
+
 var currentTags = [];
 
 class ItemInput extends Component {
   state = DEFAULT_STATE
 
+  sendEmail = () => {
+    var template_params = {
+    "reply_to": this.state.email,
+    }
+    emailjs.send(service_id, template_id, template_params, user_id)
+  }
+  
   uploadItemInfo = (photoURLs) => {
     this.setState({photoUrls: photoURLs});
     this.state.tags = currentTags.map(function(o) { return o.key });
@@ -41,6 +54,8 @@ class ItemInput extends Component {
           }
         })
         .catch(err => console.log(err));
+      this.sendEmail();
+      console.log("Email Sent")
     }
   }
 
@@ -48,29 +63,25 @@ class ItemInput extends Component {
     this.setState({
       name: e.target.value
     });
-
   }
 
   updateEmail = (e) => {
     this.setState({
       email: e.target.value
     });
-    this.props.handleEmailChange(e.target.value);
   }
 
   render() {
     let {email, name, photoUrls, videoUrl, meshUrl, tags} = this.state;
     return (
       <div>
-      <Grid textAlign="left" style={{ paddingLeft: '2%'}}>
-        <Grid.Column style={{width: '30%'}} style={{ paddingRight: '100%'}}>
-          <Input label={{ content: 'Email' }} labelPosition='left' placeholder='Your email here' onChange={this.updateEmail}/>
-        </Grid.Column>
-        <Grid.Column style={{width: '30%'}} style={{ paddingRight: '100%'}}>
-            <Input label={{ content: 'Mesh Name' }} labelPosition='left' placeholder='Enter item name' onChange={this.updateName}/>
-        </Grid.Column>
+      <Grid textAlign="center">
         <Grid.Column style={{width: '60%'}}>
-          <Header as='h3'> Relevant tags: </Header>
+          <Input label={{ content: 'Email' }} labelPosition='left' placeholder='Your email here' onChange={this.updateEmail}/>
+        <Grid.Row style={{height: '10%'}}></Grid.Row>
+          <Input label={{ content: 'Name' }} labelPosition='left' placeholder='Enter item name' onChange={this.updateName}/>
+        <Grid.Row style={{height: '10%'}}></Grid.Row>
+          <Header as='h3'> Add some tags? </Header>
           <Dropdown
             fluid
             clearable
