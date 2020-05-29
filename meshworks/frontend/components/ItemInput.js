@@ -40,14 +40,14 @@ class ItemInput extends Component {
   render() {
     let {email, name, tags} = this.state;
     return (
-      <Container style={{marginTop: '5em', marginBottom: '5em'}}>
+      <Container>
         <Container style={{ marginBottom: '2vh'}}>
             <Header as='h3'> What will the mesh be called? </Header>
-            <Input placeholder='Mesh name' onChange={this.updateName}/>
+            <Input placeholder='Name Of Mesh' onChange={this.updateName}/>
         </Container>
         <Container style={{ marginBottom: '5vh'}}>
           <Header as='h3'> Where should we reach you? </Header>
-          <Input labelPosition='left' placeholder='Your email here' onChange={this.updateEmail}/>
+          <Input labelPosition='left' placeholder='Your Email' onChange={this.updateEmail}/>
         </Container>
         <Container>
           <Header as='h3'> Finally, tag it: </Header>

@@ -144,30 +144,32 @@ class UploadPage extends Component {
       />
 
     return (
-      <Grid textAlign="left" style = {{marginLeft: '20vw', marginRight: '20vw'}} stackable columns={2}>
-        <Grid.Row stretched>
-          <Grid.Column>
-            <Container>
-              <Header as='h1' style={{verticalAlign: 'top'}}> Create your Mesh </Header>
-            </Container>
-            <Container style={{height: '70%'}}>
-              <FileUploader onChangeStatus={this.handleFileChangeStatus}
-                            style={{marginBottom: '5vh'}} />
-            </Container>
+      <Container style = {{marginLeft: '20vw', marginRight: '20vw'}}>
+        <Header as='h1' style={{verticalAlign: 'top', marginBottom: '2.5em'}}> Create your Mesh </Header>
 
-          </Grid.Column>
-          <Grid.Column>
-            <Container>
-              <ItemInput handleItemInfoChange = {this.handleItemInfoChange}/>
-            </Container>
+        <Grid textAlign="left" stackable relaxed verticalAlign='top' columns={2}>
+          <Grid.Row stretched>
+            <Grid.Column >
+              <Container>
+                <FileUploader onChangeStatus={this.handleFileChangeStatus} />
+              </Container>
 
-            <Container>
-              <Button primary onClick={this.submitEverything}> Submit </Button>
-              {this.state.submitCompleteMessage ? submitCompleteMessage : null}
-            </Container>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+            </Grid.Column>
+            <Grid.Column>
+              <Container style={{marginBottom: '5em'}}>
+                <ItemInput handleItemInfoChange = {this.handleItemInfoChange}/>
+              </Container>
+
+              <Container>
+                <Button primary onClick={this.submitEverything} style={{marginBottom: '3em'}}>
+                 Submit
+                </Button>
+                {this.state.submitCompleteMessage ? submitCompleteMessage : null}
+              </Container>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
     )
   }
 }
