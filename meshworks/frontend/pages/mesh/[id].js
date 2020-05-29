@@ -48,6 +48,5 @@ export default function MeshPage ({children, href}) {
           </Grid.Row>
         </Grid.Column>
       </Grid>
-
     )
 }
