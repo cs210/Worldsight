@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "NODE_ENV=development PORT=3000 node server.js",
     "build": "next build",
-    "prod": "NODE_ENV=production PORT=3000 node server.js"
+    "prod": "NODE_ENV=production PORT=3000 forever start server.js"
   },
   "dependencies": {
     "@google/model-viewer": "^0.10.0",
