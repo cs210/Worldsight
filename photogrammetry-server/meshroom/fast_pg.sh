@@ -19,7 +19,14 @@ echo "Executing Pipeline"
 ./meshroom_photogrammetry --input ${input} --output ${output} --pipeline updated_fast.mg --forceStatus --forceCompute
 echo "Execution finished"
 
+echo "Converting OBJ to GLTF"
+echo ""
+obj2gltf -i ${output}/texturedMesh.obj -o ${output}/texturedMesh.glb
+echo "Conversion completed"
+
+
 end=`date +%s`
+
 
 runtime=$((end-start))
 
