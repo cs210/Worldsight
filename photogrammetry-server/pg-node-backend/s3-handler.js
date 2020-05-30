@@ -1,25 +1,38 @@
 var AWS = require('aws-sdk');
-var bucketName = "meshworks"
-var bucketRegion = "us-east-1"
+const fs = require('fs');
+require('dotenv').config();
 
-module.exports = {
-  deleteFileFromS3: function (fileName) {
-      try {
-	  var params = {
-	      Bucket: bucketName,
-	      // we can specify folders by adding foldername in the quotes
-	      Key: "" + fileName
-	  };
-	  var deleteObjectPromise = new AWS.S3({
-	      apiVersion: '2006-03-01'
-	  }).deleteObject(params).promise();
 
-	  return deleteObjectPromise.then(
-	      function(data) {
-		  console.log("Successfully deleted file from following bucket : " + params.Bucket + ' Key' + params.key);
-	      });
-      } catch (error) {
-	  console.error("Error while deleting file from S3 :", error, error.stack);
-      }
-  }
+const s3 = new AWS.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+});
+
+async function uploadFile(fileName, key) {
+  //const data = await fs.readFile(fileName);
+  const data = fs.createReadStream(fileName);
+  data.on('open', () => {
+    console.log(fileName + ' filestream open')
+  })
+  data.on('end', () => {
+    console.log(fileName + ' filestream end')
+  })
+  data.on('close', () => {
+    console.log(fileName + ' filestream close')
+  })
+
+  const params = {
+      Bucket: process.env.AWS_BUCKET_NAME, // pass your bucket name
+      Key: key,
+      Body: data
+  };
+
+  console.log("Start upload");
+  let s3Response = await s3.upload(params).promise();
+  //if(e) throw e;
+  console.log(`File uploaded successfully at ${s3Response.Location}`)
+
+  return s3Response.Location;
 };
+
+module.exports = uploadFile;

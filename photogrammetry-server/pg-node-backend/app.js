@@ -1,5 +1,7 @@
 const http = require('http');
 const mongoose = require('mongoose');
+var itemProcess = require('./item-processor.js');
+
 const Item = require('./models/item.js');
 
 // Use environment variables with dotenv
@@ -13,14 +15,7 @@ mongoose.connect(process.env.DB, {useNewUrlParser: true})
 Item.watch().on('change', async (data) => {
   const newItem = data.fullDocument;
   console.log("New item: ", newItem);
-
-  // Check item is valid (includes photoURLs, etc)
-  // create directory in pg_inputs named the newItem._id
-  // download the images from newItem.photoURLs
-  // RUN PG. convert to mesh (output in pg_outputs)
-  // upload mesh to S3, then update the meshURL field of this item in db
-  // send completion email with mesh-works.io/mesh/{newItem._id} as link
-  // delete downloaded directory in pg_inputs
+  await itemProcess(newItem);
 });
 
 

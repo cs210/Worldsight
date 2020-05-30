@@ -3,8 +3,10 @@ var fs = require('fs');
 var path = require('path');
 var rimraf = require("rimraf");
 
+var uploadFile = require('./s3-handler.js');
 const download = require('images-downloader').images;
 var photogrammetry = require('./commandline-server.js');
+
 const EXTENSION = '.glb';
 const BACKEND = 'http://mesh-works.io/';
 
@@ -38,6 +40,12 @@ var cloroxItem  = {
   __v: 0
 }
 
+// // Called after file is put to s3
+// function onFinishS3Put(signResult, file) {
+//   console.log(signResult, file);
+//
+//   let newPhotoURL = S3_BUCKET_URL+signResult.fileKey;
+// }
 
 async function updateDB(id, meshUrl) {
   try {
@@ -90,6 +98,8 @@ async function handleNewItem(newItem) {
 
   // Upload to s3
   console.log("Step 4: Uploading mesh " + meshPath + " to s3.");
+  res = await uploadFile(meshPath, newItem._id);
+  console.log("Result is " + res);
 
   // Update the DB entry with link to mesh in s3.
   console.log("Step 5: updating mesh path in DB.");
@@ -102,6 +112,8 @@ async function handleNewItem(newItem) {
   console.log("Step 7: deleting input directory.");
   await rimraf(inputDir, function () { console.log("deleting done."); });
 }
+
+//module.exports = handleNewItem;
 
 
 //handleNewItem(cloroxItem);
