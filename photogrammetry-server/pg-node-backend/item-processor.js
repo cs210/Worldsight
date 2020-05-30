@@ -4,6 +4,7 @@ var path = require('path');
 var rimraf = require("rimraf");
 
 var uploadFile = require('./s3-handler.js');
+var emailSender = require('./email-sender.js')
 const download = require('images-downloader').images;
 var photogrammetry = require('./commandline-server.js');
 
@@ -59,12 +60,30 @@ async function updateDB(id, meshUrl) {
   }
 }
 
+async function findOutputMeshPath(outputDir) {
+  if (!fs.existsSync(outputDir)) {
+    throw new Error( 'Output directory doesn\'t exist.');
+  }
+  let targetFiles = fs.readdirSync(outputDir).filter(
+    function(file) {
+      return path.extname(file).toLowerCase() === EXTENSION;
+  });
+  if (targetFiles.length > 0) {
+
+    return outputDir + '/' + targetFiles[0];
+
+  } else {
+    throw new Error('No mesh matching file extension ' + EXTENSION);
+  }
+}
+
 async function handleNewItem(newItem) {
   let res, e;
 
   // Check item is valid (includes photoURLs, etc)
   if (newItem.photoUrls.length == 0 || newItem._id === "") throw 'Failed to process new item.';
   var inputDir = 'pg-inputs/' + newItem._id;
+  res = await emailSender.sendConfirmationEmail(newItem.email, newItem.name);
 
   // download the images from newItem.photoURLs
   console.log("Step 1: Downloading from photoURLs. " + inputDir);
@@ -82,31 +101,19 @@ async function handleNewItem(newItem) {
 
   // Check mesh from photogrammetry exists
   console.log("Step 3: Looking for mesh output.");
-  var meshPath = '';
-  if (!fs.existsSync(outputDir)) {
-    throw new Error( 'Output directory doesn\'t exist.');
-  }
-  let targetFiles = fs.readdirSync(outputDir).filter(
-    function(file) {
-      return path.extname(file).toLowerCase() === EXTENSION;
-    });
-  if (targetFiles.length > 0) {
-    meshPath = outputDir + '/' + targetFiles[0];
-  } else {
-    throw new Error('No mesh matching file extension ' + EXTENSION);
-  }
+  let meshPath = await findOutputMeshPath(outputDir);
 
   // Upload to s3
   console.log("Step 4: Uploading mesh " + meshPath + " to s3.");
-  res = await uploadFile(meshPath, newItem._id);
-  console.log("Result is " + res);
+  meshS3URL = await uploadFile(meshPath, newItem._id);
 
   // Update the DB entry with link to mesh in s3.
-  console.log("Step 5: updating mesh path in DB.");
-  var meshUrl = 'https://meshworks.s3.amazonaws.com/glb-files/out.glb'; //test
-  res = await updateDB(newItem._id, meshUrl);
-  // send completion email with mesh-works.io/mesh/{newItem._id} as link
+  console.log("Step 5: updating mesh path in DB with: " + meshS3URL);
+  res = await updateDB(newItem._id, meshS3URL);
 
+  // send completion email with mesh-works.io/mesh/{newItem._id} as link
+  console.log("Step 6: send completion email.");
+  res = await emailSender.sendMeshCompleteEmail(newItem.email, newItem._id, newItem.name);
 
   // delete downloaded directory in pg_inputs
   console.log("Step 7: deleting input directory.");
