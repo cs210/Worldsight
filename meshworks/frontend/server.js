@@ -27,8 +27,6 @@ app
     server = express()
 
     // Set up the proxy.
-    // TODO: we're using a proxy for both dev and prod for now.
-    //if (devProxy) {
     if (dev && devProxy) {
       const proxyMiddleware = require('http-proxy-middleware')
       Object.keys(devProxy).forEach(function(context) {
