@@ -11,6 +11,7 @@ var photogrammetry = require('./commandline-server.js');
 const EXTENSION = '.glb';
 const BACKEND = 'http://mesh-works.io/';
 
+// TODO: Remove this later.
 // Assume that the database watcher had just been notified of
 // this new item instance.
 var cloroxItem  = {
@@ -41,13 +42,8 @@ var cloroxItem  = {
   __v: 0
 }
 
-// // Called after file is put to s3
-// function onFinishS3Put(signResult, file) {
-//   console.log(signResult, file);
-//
-//   let newPhotoURL = S3_BUCKET_URL+signResult.fileKey;
-// }
-
+// Finds the itme in DB with id, updates its meshUrl field.
+// Connects to the mesh-works.io backend
 async function updateDB(id, meshUrl) {
   try {
     let res = await axios.post(BACKEND + 'api/items/updatemesh',
