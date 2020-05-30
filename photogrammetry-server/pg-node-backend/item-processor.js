@@ -1,10 +1,12 @@
+var axios = require('axios');
 var fs = require('fs');
 var path = require('path');
+var rimraf = require("rimraf");
 
 const download = require('images-downloader').images;
 var photogrammetry = require('./commandline-server.js');
 const EXTENSION = '.glb';
-const throwMessage = 'Failed to process new item.';
+const BACKEND = 'http://mesh-works.io/';
 
 // Assume that the database watcher had just been notified of
 // this new item instance.
@@ -36,64 +38,71 @@ var cloroxItem  = {
   __v: 0
 }
 
+
+async function updateDB(id, meshUrl) {
+  try {
+    let res = await axios.post(BACKEND + 'api/items/updatemesh',
+                                  {"id": id, "meshurl": meshUrl});
+    if(res.data){
+      console.log("POST successful.");
+    }
+  } catch (e) {
+    throw e;
+  }
+}
+
 async function handleNewItem(newItem) {
+  let res, e;
 
   // Check item is valid (includes photoURLs, etc)
-  if (newItem.photoUrls.length == 0 || newItem._id === "") throw throwMessage;
+  if (newItem.photoUrls.length == 0 || newItem._id === "") throw 'Failed to process new item.';
   var inputDir = 'pg-inputs/' + newItem._id;
 
+  // download the images from newItem.photoURLs
   console.log("Step 1: Downloading from photoURLs. " + inputDir);
   // create directory in ./pg_inputs named newItem._id
-  if (!fs.existsSync(inputDir)){
-      fs.mkdirSync(inputDir);
-  }
-  // download the images from newItem.photoURLs
-  try {
-    let result = await download(newItem.photoUrls, inputDir);
-    console.log('All images downloaded.', result);
-  } catch (err) {
-    console.log('Images failed to download, ' + err);
-    throw throwMessage;
-  }
+  if (!fs.existsSync(inputDir)){ fs.mkdirSync(inputDir); }
+  res = await download(newItem.photoUrls, inputDir);
+  //if(e) throw e;
+  console.log('All images downloaded.', res);
 
   // RUN PG. convert to mesh (output in pg_outputs)
   console.log("Step 2: Running PG.");
   var outputDir = 'pg-outputs/' + newItem._id;
-  try {
-    let result = await photogrammetry(inputDir, outputDir);
-  } catch (err) {
-    console.log('PG execution failed. \n' + err);
-    throw throwMessage;
-  }
+  res = await photogrammetry(inputDir, outputDir);
+  //if(e) throw e;
 
-  // upload mesh to S3, then update the meshURL field of this item in db
   // Check mesh from photogrammetry exists
   console.log("Step 3: Looking for mesh output.");
   var meshPath = '';
-  try {
-    if (!fs.existsSync(outputDir)) {
-        throw 'Output directory doesn\'t exist.';
-    }
-    // Search for a .EXTENSION mesh file under the output directory.
-    var targetFiles = fs.readdirSync(outputDir).filter(
-      function(file) {
-        return path.extname(file).toLowerCase() === EXTENSION;
-      });
-    if (targetFiles.length > 0) {
-      meshPath = targetFiles[0];
-    } else { throw 'No mesh matching file extension ' + EXTENSION; }
-  } catch (error) {
-      console.log('Error: No mesh in result, PG must have failed. \n' + error);
-      throw throwMessage;
+  if (!fs.existsSync(outputDir)) {
+    throw new Error( 'Output directory doesn\'t exist.');
+  }
+  let targetFiles = fs.readdirSync(outputDir).filter(
+    function(file) {
+      return path.extname(file).toLowerCase() === EXTENSION;
+    });
+  if (targetFiles.length > 0) {
+    meshPath = outputDir + '/' + targetFiles[0];
+  } else {
+    throw new Error('No mesh matching file extension ' + EXTENSION);
   }
 
   // Upload to s3
-  console.log("Step 4: Uploading mesh " + meshPath + "to s3.");
+  console.log("Step 4: Uploading mesh " + meshPath + " to s3.");
 
-
+  // Update the DB entry with link to mesh in s3.
+  console.log("Step 5: updating mesh path in DB.");
+  var meshUrl = 'https://meshworks.s3.amazonaws.com/glb-files/out.glb'; //test
+  res = await updateDB(newItem._id, meshUrl);
   // send completion email with mesh-works.io/mesh/{newItem._id} as link
 
+
   // delete downloaded directory in pg_inputs
+  console.log("Step 7: deleting input directory.");
+  await rimraf(inputDir, function () { console.log("deleting done."); });
 }
 
-handleNewItem(cloroxItem);
+
+//handleNewItem(cloroxItem);
+handleNewItem(cloroxItem).catch( e => {console.error(e)});
