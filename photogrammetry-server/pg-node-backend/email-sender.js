@@ -20,3 +20,7 @@ module.exports = {
   sendConfirmationEmail: sendConfirmationEmail,
   sendMeshCompleteEmail: sendMeshCompleteEmail
 };
+
+// TODO:
+// Unblock to test functionality via: node email-sender.js
+// sendConfirmationEmail('worldsightvr@gmail.com', 'Test Mesh')
