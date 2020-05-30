@@ -46,6 +46,17 @@ router.post('/items', (req, res, next) => {
   }
 });
 
+// Update mesh
+router.post('/items/updatemesh/:id:meshurl', (req, res, next) => {
+  Item.findOneAndUpdate(
+    {"_id": req.params.id},
+    {"meshUrl": req.params.meshurl},
+    {new: true}
+  )
+    .then(data => res.json(data))
+    .catch(next)
+});
+
 router.get('/items/:id', (req, res, next) => {
   Item.findOne({"_id": req.params.id})
     .then(data => res.json(data))
