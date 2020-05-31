@@ -101,7 +101,7 @@ async function handleNewItem(newItem) {
 
   // Upload to s3
   console.log("Step 4: Uploading mesh " + meshPath + " to s3.");
-  meshS3URL = await uploadFile(meshPath, newItem._id);
+  meshS3URL = await uploadFile(meshPath, newItem._id + EXTENSION);
 
   // Update the DB entry with link to mesh in s3.
   console.log("Step 5: updating mesh path in DB with: " + meshS3URL);
