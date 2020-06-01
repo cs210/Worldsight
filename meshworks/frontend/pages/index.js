@@ -43,7 +43,7 @@ class Feed extends Component {
 		let feedDisplay = this.state.items.map((item,i) => {
 			const meshUrl = item.meshUrl || this.state.defaultMesh;
 			const name = item.name;
-			const tagElements = item.tags.map((tag,i) => <a key={i} className="ui tag label">{tag}</a>);
+			const tagElements = item.tags.map((tag,i) => <Grid.Row> <a key={i} className="ui mini tag label">{tag}</a> </Grid.Row>);
 
 			return(
 				<Grid.Column>
