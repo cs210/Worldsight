@@ -5,6 +5,7 @@
     "images-downloader": "^1.0.3",
     "mongodb": "^3.5.7",
     "mongoose": "^5.9.15",
-    "mongoose-timestamp": "^0.6.0"
+    "mongoose-timestamp": "^0.6.0",
+    "shelljs": "^0.8.4"
   }
 }

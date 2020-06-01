@@ -13,7 +13,8 @@ async function photogrammetry(inputDir, outputDir) {
   console.log(command);
 
   const pg = spawn(command, {
-    shell: true
+    shell: true,
+    stdio: ['ipc']
   });
 
   let data = "";
