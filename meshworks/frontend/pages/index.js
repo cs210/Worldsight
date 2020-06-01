@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {Container,Grid,Image,Header} from 'semantic-ui-react'
 import axios from 'axios';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 const DynamicModelViewer = dynamic(
   () => import('../components/ModelViewer.js'),
   { ssr: false }
@@ -17,12 +18,6 @@ class Feed extends Component {
 	componentDidMount(){
 		this.getItems();
 	}
-
-	/*I'm not sure where the page is being rendered, so I couldn't check previous props; however,
-	this should be updated if we want the feed to actively update*/
-	/*componentDidUpdate(){
-
-	}*/
 
 	getItems = () => {
 	    axios.get('/api/items')
@@ -44,14 +39,18 @@ class Feed extends Component {
 			const meshUrl = item.meshUrl || this.state.defaultMesh;
 			const name = item.name;
 			const tagElements = item.tags.map((tag,i) => <Grid.Row> <a key={i} className="ui mini tag label">{tag}</a> </Grid.Row>);
+			const id = item._id;
+			const address = "/mesh/" + id;
 
 			return(
-				<Grid.Column>
-					<DynamicModelViewer customName={name} customWidth="50%" customHeight="20em" customImage={meshUrl}></DynamicModelViewer>
-					<Grid.Row>
-						{tagElements}
-					</Grid.Row>
-				</Grid.Column>
+				<Link href={address}>
+					<Grid.Column>
+						<DynamicModelViewer customName={name} customWidth="50%" customHeight="20em" customImage={meshUrl}></DynamicModelViewer>
+						<Grid.Row>
+							{tagElements}
+						</Grid.Row>
+					</Grid.Column>
+				</Link>
 			)
 		});
 
@@ -60,11 +59,11 @@ class Feed extends Component {
 	    return (
 		    <Container style={{ marginTop: '7em' }}>
 		    	<Header as='h1'> Mesh Feed </Header>
-		     	<Grid columns={3}>
-		     		<Grid.Row>
-				    	{feedDisplay}
-				    </Grid.Row>
-		  		</Grid>
+			     	<Grid columns={3}>
+			     		<Grid.Row>
+					    	{feedDisplay}
+					    </Grid.Row>
+			  		</Grid>
 		    </Container>
 	    );
 	}
