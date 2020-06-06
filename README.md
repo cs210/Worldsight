@@ -37,10 +37,10 @@ We are also developing a separate web platform experience to showcase the potent
 </p>
 
 ## Photogrammetry Request Workflow
-1. The client is served the [link](http://mesh-works.io/ "Title") from our webserver, which is a dedicated Amazon EC2 instance. 
-2. The client uploads photos to an Amazon S3 bucket, which stores both the photos used to create the 3D object mesh and the 3D object mesh itself. 
+1. The client is served the [Meshworks Website](http://mesh-works.io/ "Title") from our webserver, which is a dedicated Amazon EC2 instance. 
+2. The webserver uploads photos to an Amazon S3 bucket, which stores both the photos used to create the 3D object mesh and the 3D object mesh itself. 
 3. The webserver stores relevant information for each photogrammetry request in a MongoDB Atlas server. It stores the name of the user, email, tags, links to the photos in the S3 bucket, and more. 
-4.The photogrammetry server, which is another EC2 instance, watches the MongoDB database for updates. When a request is made, it obtains all the necessary information to create a 3D object mesh, including the S3 links. 
+4. The photogrammetry server, which is another EC2 instance, watches the MongoDB database for updates. When a request is made, it obtains all the necessary information to create a 3D object mesh, including the S3 links. 
 5. The photogrammetry server downloads all the photos for the request from the S3 bucket. 
 6. Once the photogrammetry pipeline is finished, the 3D object mesh is uploaded to the S3 bucket in glb format. 
 
