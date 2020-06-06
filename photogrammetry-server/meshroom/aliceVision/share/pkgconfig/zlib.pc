@@ -1,0 +1,13 @@
+prefix=/tmp/AliceVision_build/external/zlib_build
+exec_prefix=/tmp/AliceVision_build/external/zlib_build
+libdir=/tmp/AliceVision_build/external/zlib_build/lib
+sharedlibdir=/tmp/AliceVision_build/external/zlib_build/lib
+includedir=/tmp/AliceVision_build/external/zlib_build/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.11
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
