@@ -32,7 +32,7 @@ Team Worldsight is building an intuitive pipeline, Meshworks, for e-commerce sel
 
 We are also developing a separate web platform experience to showcase the potential for building on top of the post-pipeline production. Our pipeline can be divided into 2 sections:
 
-<img src="https://github.com/cs210/Worldsight/blob/master/pipeline.png">
+<img src="https://github.com/cs210/Worldsight/blob/master/MeshworksTechStack.png">
 
 ## 1. Meshroom Automation
 Meshroom is an open source photogrammetry software which takes in 2D photos of an object and outputs a 3D mesh object. You can find the source code and documentation for meshroom [here](https://github.com/alicevision/meshroom). Using the software and command line interface is tedious and unintuitive for people with less technical experience, so we are wrapping a convenient GUI around the software package, and creating python scripts that run the necessary commmands to create the 3D mesh. The python scripts that run meshroom can be found in the [pipeline](https://github.com/cs210/Worldsight/tree/master/pipeline) folder and the code for the GUI can be found in the [software-demo](https://github.com/cs210/Worldsight/tree/master/software-demo) folder. The GUI uses Tkinter, a Python GUI toolkit. 
