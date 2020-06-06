@@ -13,7 +13,7 @@ class ModelViewer extends Component {
   render() {
     const {customWidth,customHeight,customImage,customName} = this.props;
     return (
-        <Container>
+        <Container style={{marginTop: '2em'}}>
         <Header as='h3'> {this.state.name || customName} </Header>
           <model-viewer
               src={customImage || this.state.imageSrc}

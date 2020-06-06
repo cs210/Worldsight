@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "start-watch": "nodemon index.js",
-    "dev": "yarn run start-watch",
-    "prod": "yarn run start-watch",
+    "dev": "yarn run start",
+    "prod": "forever start index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jihee Hwang",

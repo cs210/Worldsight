@@ -9,9 +9,8 @@ import FileUploader from '../../components/FileUploader';
 //params for uploading to S3.
 const S3_BUCKET_URL= 'https://meshworks.s3.amazonaws.com/';
 const uploadOptions = {
-  server: 'http://localhost:5000',
   s3path: S3_BUCKET_URL,
-  signingUrl: "/s3/sign"
+  signingUrl: "/api/s3/sign"
 }
 
 const emptyItem = {

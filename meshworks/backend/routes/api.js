@@ -46,6 +46,23 @@ router.post('/items', (req, res, next) => {
   }
 });
 
+// Update mesh
+router.post('/items/updatemesh', (req, res, next) => {
+  if(req.body) {
+    Item.findOneAndUpdate(
+      {"_id": req.body.id},
+      {"meshUrl": req.body.meshurl},
+      {new: true}
+    )
+      .then(data => {
+        res.json(data)
+      })
+      .catch(next)
+  }else {
+    res.json({error: "The input field is empty"});
+  }
+});
+
 router.get('/items/:id', (req, res, next) => {
   Item.findOne({"_id": req.params.id})
     .then(data => res.json(data))

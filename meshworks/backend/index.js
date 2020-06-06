@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 // app.use('/sign_s3', sign_s3.sign_s3);
 
-app.use('/s3', require('react-dropzone-s3-uploader/s3router')({
+app.use('/api/s3', require('react-dropzone-s3-uploader/s3router')({
   bucket: process.env.AWS_BUCKET_NAME,
   region: process.env.AWS_REGION,
   headers: {'Access-Control-Allow-Origin': '*'},

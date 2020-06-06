@@ -36,7 +36,7 @@ async function photogrammetry(inputDir, outputDir) {
       throw new Error( `subprocess error exit ${exitCode}, ${error}`);
   }
 
-  return data;
+  return [data, exitCode];
 
 /*
   ls.stdout.on("data", data => {
