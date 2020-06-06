@@ -33,7 +33,7 @@ Team Worldsight is building an intuitive pipeline, Meshworks, for e-commerce sel
 We are also developing a separate web platform experience to showcase the potential for building on top of the post-pipeline production. Our pipeline can be divided into 2 sections:
 
 <p align="center">
-  <img src="https://github.com/cs210/Worldsight/blob/master/MeshworksTechStack.png">
+  <img src="https://github.com/cs210/Worldsight/blob/master/TechStack.png">
 </p>
 
 ## Photogrammetry Request Workflow
