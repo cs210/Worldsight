@@ -27,6 +27,9 @@ Aakanksha | White/Blue | AI/deep learning, Scraping | Writing, VC, business deve
 Grace | Blue | Backend, AI/ML | presentation skills, planning/organization, time management | ambitious, reliable | VR development, product management | indecision
 Farhan | White | Unity, VR, Web Development, Graphics | planning, writing | conscientious, methodical | public speaking, product management | communication
 
+# Documentation
+[Our Wiki Page](https://github.com/cs210/Worldsight/wiki/Worldsight-Documentation)
+
 # Our product
 Team Worldsight is building an intuitive pipeline, Meshworks, for e-commerce sellers to capture, customize, and share 3D models of their products with their customers. 
 
