@@ -1,9 +1,17 @@
 #!/bin/bash
 
-
-echo "Starting" 
+start=`date +%s`
+input="$PWD/$1"
+output="$PWD/$2"
+cd "$(dirname "$0")"
+echo "Starting Photogrammetry"
+echo "input: ${input}"
+echo "output: ${output}"
 echo ""
-./meshroom_photogrammetry --input $1 --output $2 --save temp.mg --forceStatus
+
+echo "Starting"
+echo ""
+./meshroom_photogrammetry --input ${input} --output ${output} --save temp.mg --forceStatus
 echo ""
 echo "Modifying Graph"
 echo ""
@@ -12,11 +20,10 @@ echo ""
 echo "Modified graph"
 echo ""
 echo "Executing Pipeline"
-./meshroom_photogrammetry --input $1 --output $2 --pipeline updated.mg --forceStatus
+./meshroom_photogrammetry --input ${input} --output ${output} --pipeline updated.mg --forceStatus
 echo "Execution finished"
 
 echo "Converting OBJ to GLTF"
 echo ""
-obj2gltf -i $2/texturedMesh.obj -o $2/texturedMesh.glb
+obj2gltf -i ${output}/texturedMesh.obj -o ${output}/texturedMesh.glb
 echo "Conversion completed"
-
