@@ -19,8 +19,10 @@ async function sendConfirmationEmail(email, itemName) {
     var mailOptions = {
 	from: 'worldsightvr@gmail.com',
 	to: email,
-	subject: 'Your item is being processed',
-	html:"<p>" + itemName + " is being uploaded to server for conversion </p>"
+	subject: 'Meshworks: Your Item, ' + itemName + ', Is Being Processed.',
+	html:"<div>We've just confirmed that your item, " + itemName + ", have successfully been uploaded to our server for conversion. </div>"
+  + "<div> It's currently being converted to a 3D mesh, and we'll let you know again in a few minutes when the mesh is ready. </div>"
+  + "<div> Thanks for your patience! </div>"
     };
     transport.sendMail(mailOptions, (error, info) => {
 	if (error) {
@@ -28,7 +30,7 @@ async function sendConfirmationEmail(email, itemName) {
 	}
 	console.log('Email sent: ' + info.response);
     });
-  return; // TODO: Implement.
+  return;
 }
 
 async function sendMeshCompleteEmail(email, itemID, itemName) {
@@ -38,8 +40,9 @@ async function sendMeshCompleteEmail(email, itemID, itemName) {
     var mailOptions = {
         from: 'worldsightvr@gmail.com',
         to: email,
-        subject: 'Your mesh is ready!',
-        html: "<div><p>" + itemName + " has been meshified and is viewable at the link: </p><a href=" + MESH_PAGE_URL + itemID + ">Your mesh</a></div>"               
+        subject: 'Meshworks: Your Mesh Is Ready!',
+        html: "<div>Congrats! Your Item, " + itemName + ", has been successfully meshified. </div>"
+        + "<div><a href=" + MESH_PAGE_URL + itemID + ">Here</a> is the link to your mesh.</div>"
     };
     transport.sendMail(mailOptions, (error, info) => {
         if (error) {
@@ -47,7 +50,7 @@ async function sendMeshCompleteEmail(email, itemID, itemName) {
         }
         console.log('Email sent: ' + info.response);
     });
-  return; // TODO: Implement.
+  return;
 }
 
 module.exports = {
