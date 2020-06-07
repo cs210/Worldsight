@@ -41,7 +41,7 @@ class Feed extends Component {
 	      .catch(err => console.log(err));
 
 	     // console.log("Items length: ",this.state.items.length);
-	     // console.log("Show items: ",this.state.showItems);  
+	     // console.log("Show items: ",this.state.showItems);
   	}
 
 
@@ -70,18 +70,18 @@ class Feed extends Component {
 		console.log(this.state.items);*/
 	    return (
 		    <Container style={{ marginTop: '7em' }}>
-		    	<Header as='h1'> Mesh Feed </Header>
+		    	<Header as='h1'> Recent Uploads </Header>
 	     			<InfiniteScroll
 			          dataLength={this.state.showItems}
 			          next={this.handleShowMore}
 			          hasMore={true}
 			          loader={<h4>Loading...</h4>}
 			        >
-			        	<Grid columns={3}>
+			        	<Grid columns={2}>
 		    				{feedDisplay}
 			    		</Grid>
 			    	</InfiniteScroll>
-			  		
+
 		    </Container>
 	    );
 	}
