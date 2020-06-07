@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@rauschma/stringio": "^1.4.0",
     "aws-sdk": "^2.686.0",
     "axios": "^0.19.2",
     "child_process": "^1.0.2",
@@ -8,6 +9,8 @@
     "mongodb": "^3.5.7",
     "mongoose": "^5.9.15",
     "mongoose-timestamp": "^0.6.0",
+    "nodemailer": "^6.4.8",
+    "promisify-child-process": "^4.1.1",
     "rimraf": "^3.0.2"
   }
 }

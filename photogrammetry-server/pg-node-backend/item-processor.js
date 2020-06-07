@@ -2,11 +2,15 @@ var axios = require('axios');
 var fs = require('fs');
 var path = require('path');
 var rimraf = require("rimraf");
-
+const {spawn} = require('promisify-child-process')
 var uploadFile = require('./s3-handler.js');
 var emailSender = require('./email-sender.js')
 const download = require('images-downloader').images;
 var photogrammetry = require('./commandline-server.js');
+
+
+const {onExit} = require('@rauschma/stringio');
+
 
 const EXTENSION = '.glb';
 const BACKEND = 'http://mesh-works.io/';
@@ -73,27 +77,37 @@ async function findOutputMeshPath(outputDir) {
   }
 }
 
+async function checkDirValidity(directory) {
+  if (fs.existsSync(directory)){ await rimraf.sync(directory); }
+  fs.mkdirSync(directory);
+}
+
 async function handleNewItem(newItem) {
+
   let res, e;
 
   // Check item is valid (includes photoURLs, etc)
+  console.log("Step 0: Prepare for PG.");
   if (newItem.photoUrls.length == 0 || newItem._id === "") throw 'Failed to process new item.';
+  res = await emailSender.sendConfirmationEmail(newItem.email, newItem.name); // Send email.
+
+  // Create new directories (and delete existing, if any)
   var inputDir = 'pg-inputs/' + newItem._id;
-  res = await emailSender.sendConfirmationEmail(newItem.email, newItem.name);
+  await checkDirValidity(inputDir);
+  var outputDir = 'pg-outputs/' + newItem._id;
+  await checkDirValidity(outputDir);
+  var graphDir = 'pg-graphs/' + newItem._id;
+  await checkDirValidity(graphDir);
 
   // download the images from newItem.photoURLs
   console.log("Step 1: Downloading from photoURLs. " + inputDir);
-  // create directory in ./pg_inputs named newItem._id
-  if (!fs.existsSync(inputDir)){ fs.mkdirSync(inputDir); }
   res = await download(newItem.photoUrls, inputDir);
   //if(e) throw e;
   console.log('All images downloaded.', res);
 
   // RUN PG. convert to mesh (output in pg_outputs)
   console.log("Step 2: Running PG.");
-  var outputDir = 'pg-outputs/' + newItem._id;
-  res = await photogrammetry(inputDir, outputDir);
-  //if(e) throw e;
+  await photogrammetry(inputDir, outputDir, graphDir).catch((e) => console.log(e));
 
   // Check mesh from photogrammetry exists
   console.log("Step 3: Looking for mesh output.");
@@ -107,17 +121,17 @@ async function handleNewItem(newItem) {
   console.log("Step 5: updating mesh path in DB with: " + meshS3URL);
   res = await updateDB(newItem._id, meshS3URL);
 
+  // delete directories for this mesh
+  console.log("Deleting directories.");
+  await rimraf(inputDir, function () { console.log("deleting done."); });
+  await rimraf(outputDir, function () { console.log("deleting done."); });
+  await rimraf(graphDir, function () { console.log("deleting done."); });
+
   // send completion email with mesh-works.io/mesh/{newItem._id} as link
   console.log("Step 6: send completion email.");
   res = await emailSender.sendMeshCompleteEmail(newItem.email, newItem._id, newItem.name);
-
-  // delete downloaded directory in pg_inputs
-  console.log("Step 7: deleting input directory.");
-  await rimraf(inputDir, function () { console.log("deleting done."); });
 }
 
 //module.exports = handleNewItem;
 
-
-//handleNewItem(cloroxItem);
 handleNewItem(cloroxItem).catch( e => {console.error(e)});

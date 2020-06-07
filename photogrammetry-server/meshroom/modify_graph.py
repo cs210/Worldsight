@@ -1,5 +1,6 @@
 import json
 import random
+import os
 import argparse
 
 #generate a new random hex for this folder
@@ -40,13 +41,18 @@ decimate_node = {
 
 def get_args():
    parser = argparse.ArgumentParser(description="Photogrammetry pipeline")
-   parser.add_argument('-f', '--fast', type=bool, default=False) 
+   parser.add_argument('-f', '--fast', type=bool, default=False)
+   parser.add_argument('-i', '--inputDir', default="")
    return parser.parse_args()
 
 
 def build_graph(args):
 
-    filename = 'temp.mg' if not args.fast else 'temp_fast.mg'
+    filename = ''
+    if args.fast:
+        filename = os.path.join(args.inputDir, 'temp_fast.mg')
+    else:
+        filename = os.path.join(args.inputDir, 'temp.mg')
 
     with open(filename) as f:
         graph = json.load(f)
