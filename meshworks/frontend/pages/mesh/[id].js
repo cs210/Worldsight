@@ -42,7 +42,7 @@ export default function MeshPage ({children, href}) {
       <Grid textAlign="left" style={{ paddingLeft: '2%'}}>
         <Grid.Column style={{width: '75%'}}>
            <Header as='h1'> {item.name + " (" + creationDate + ")"} </Header>
-          <DynamicModelViewer />
+          <DynamicModelViewer customImage={item.meshUrl}/>
           <Grid.Row>
             {tagElements}
           </Grid.Row>
