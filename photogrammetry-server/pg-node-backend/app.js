@@ -1,7 +1,6 @@
-const http = require('http');
 const mongoose = require('mongoose');
-var itemProcess = require('./item-processor.js');
-
+const prepare_pipeline = require('./prepare-pipeline.js');
+const item_processor = require('./item-processor.js');
 const Item = require('./models/item.js');
 
 // Use environment variables with dotenv
@@ -15,20 +14,8 @@ mongoose.connect(process.env.DB, {useNewUrlParser: true})
 Item.watch().on('change', async (data) => {
   const newItem = data.fullDocument;
   console.log("New item: ", newItem);
-  await itemProcess(newItem);
+
+  await prepare_pipeline(newItem);
+  await item_processor(newItem);
+
 });
-
-
-
-
-
-// Create an instance of the http server to handle HTTP requests
-let app = http.createServer((req, res) => {
-  // Set a response type of plain text for the response
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  // Send back a response and end the connection
-  res.end('Hello World!\n');
-});
-
-app.listen(8080, '127.0.0.1');
-console.log('Node server running on port 8080');

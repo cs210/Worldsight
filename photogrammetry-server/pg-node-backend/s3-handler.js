@@ -1,10 +1,9 @@
 var AWS = require('aws-sdk');
 const fs = require('fs');
-require('dotenv').config();
-
+require('dotenv').config({path:'.env'})
 
 const s3 = new AWS.S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
 
@@ -28,6 +27,7 @@ async function uploadFile(fileName, key) {
   };
 
   console.log("Start upload");
+
   let s3Response = await s3.upload(params).promise();
   //if(e) throw e;
   console.log(`File uploaded successfully at ${s3Response.Location}`)
